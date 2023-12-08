@@ -51,7 +51,7 @@ const Home = () => {
                   <div className="max-w-[850px] mx-auto ">
                     <div className="relative mb-[30px] z-10 w-full min-[1200px]:mb-0">
                       <h6 className="mb-5 opacity-100 visible text-sm min-[767px]:text-base text-center">
-                        // TALENTED ENGINEER & MECHANICS
+                        TALENTED ENGINEER & MECHANICS
                       </h6>
                       <h1
                         className="text-3xl text-center mb-5 text-white uppercase font-bold leading-[1]
