@@ -58,8 +58,8 @@ const MobileCustomList: React.FC<MobileCustomListProps> = ({
       {list.length != 0 && (
         <ul
           className={`${
-            open ? "h-auto visible opacity-100" : "h-0 invisible opacity-0"
-          }  w-full p-0 pl-[15px]  [transition:height_0.3s,visible_0.1s,opacity_0.1s]  ease-linear`}
+            open ? "h-auto visible opacity-100  " : "h-0 invisible opacity-0 "
+          }  w-full p-0 pl-[15px]  [transition:height_0.3s,visible_0.1s,opacity_0.1s] overflow-hidden ease-linear`}
         >
           {list.map((item) => {
             return (

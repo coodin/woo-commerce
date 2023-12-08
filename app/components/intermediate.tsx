@@ -279,7 +279,7 @@ const Intermediate = () => {
               <a
                 href=""
                 className="py-[15px] px-[20px] font-bold 
-                text-sm inline-block bg-[#e53e29] leading-[1.8] text-[#fff]  hover:bg-[#F2F6F7] transition-all duration-300 ease-linear hover:text-[#071c1f]"
+                text-sm whitespace-nowrap inline-block bg-[#e53e29] leading-[1.8] text-[#fff]  hover:bg-[#F2F6F7] transition-all duration-300 ease-linear hover:text-[#071c1f]"
               >
                 GET APPOINTMENT
               </a>
