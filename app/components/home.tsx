@@ -21,10 +21,6 @@ const Home = () => {
     x: null,
     y: null,
   });
-  // useEffect(() => {
-  //   console.log("X", coords.x);
-  //   console.log("Y", coords.y);
-  // }, [coords]);
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
@@ -242,7 +238,7 @@ const Home = () => {
               <div className="">
                 <div className="mb-10">
                   <h6 className="text-[#e53e29] uppercase mb-[15px] font-bold ">
-                    // ABOUT US
+                    ABOUT US
                   </h6>
                   <h1
                     className="text-[#071c1f] 
@@ -321,7 +317,7 @@ const Home = () => {
             >
               <div className="mb-[40px]">
                 <h6 className="text-[#e53e29] uppercase text-sm font-sans font-bold mb-[15px]">
-                  // WHY CHOOSE US
+                  WHY CHOOSE US
                 </h6>
                 <h1
                   className="text-[24px] mb-[15px]
@@ -449,7 +445,7 @@ const Home = () => {
             <div className="relative px-[15px] w-full max-w-full">
               <div className="mb-[40px] text-center">
                 <h6 className="text-[#e53e29] uppercase text-sm font-sans font-bold mb-[15px]">
-                  // SERVICE
+                  SERVICE
                 </h6>
                 <h1
                   className="text-[24px] mb-[15px]
