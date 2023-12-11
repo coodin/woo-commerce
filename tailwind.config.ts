@@ -13,6 +13,21 @@ const config: Config = {
     },
     boxShadow: { search: "0 1px 6px 0 rgba(32, 33, 36, .28)" },
     extend: {
+      animation: {
+        shake: "shake 5.33333s 0.1s infinite linear",
+      },
+      keyframes: {
+        shake: {
+          "0%": {
+            transform: "rotateZ(0deg) translate3d(0, 10%, 0) rotateZ(0deg)",
+          },
+          "100%": {
+            transform:
+              "rotateZ(360deg) translate3d(0, 10%, 0) rotateZ(-360deg)",
+          },
+        },
+      },
+
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
