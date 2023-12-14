@@ -9,6 +9,26 @@ import CarSvg from "../icons/car";
 import PlumberSvg from "../icons/plumber";
 import GearSvg from "../icons/gear";
 import SettingsSvg from "../icons/settings";
+import CallSvg from "../icons/call";
+import ChildHeading from "./ui/childHeading";
+import MainHeading from "./ui/mainHeading";
+import EngineSvg from "../icons/engine";
+import CarDoorSvg from "../icons/carDoor";
+import CarburetorSvg from "../icons/carburetor";
+import Slider from "react-slick";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import SettingsVariationSvg from "../icons/settingsVariation";
+import HightWaySvg from "../icons/highWay";
+import EyeSvg from "../icons/eye";
+import BasketSvg from "../icons/basket";
+import FavoriteSvg from "../icons/favorite";
+import { formatter } from "@/lib/utils";
+import Arrow from "./ui/Arrow";
+import PrevSvg from "../icons/prev";
+import NextSvg from "../icons/next";
+import Cars from "./ui/cars";
 
 const Home = () => {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
@@ -22,9 +42,19 @@ const Home = () => {
     y: null,
   });
 
+  const [carsTab, setCarsTab] = useState<"newCars" | "oldCars">("newCars");
+  const [isHovered, setIsHovered] = useState(false);
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
-      const rect = divRef.current!.getBoundingClientRect();
+      //  const rect = divRef.current!.getBoundingClientRect();
       // console.log(`window.innerWidth ${window.innerWidth}`);
 
       const offsetX = (-0.1 * (event.clientX - window.innerWidth / 2)) / 2;
@@ -62,9 +92,9 @@ const Home = () => {
       {/* First Section */}
       <div className="relative overflow-hidden">
         <video
-          autoPlay
-          muted
-          loop
+          autoPlay={true}
+          muted={true}
+          loop={true}
           className="absolute left-0 top-0 w-screen min-w-full h-full object-cover"
         >
           <source
@@ -73,7 +103,7 @@ const Home = () => {
           ></source>
         </video>
         <div
-          className="relative flex justify-center items-center h-auto pt-[300px] pb-[100px] min-h-[400px]
+          className="relative flex justify-center items-center h-screen pt-[300px] pb-[100px] min-h-[400px]
          min-[767px]:min-h-[400px]  min-[767px]:pt-[200px]
          min-[991px]:min-h-[550px] 
          min-[1199px]:min-h-[800px]  min-[1199px]:h-screen
@@ -237,16 +267,8 @@ const Home = () => {
             >
               <div className="">
                 <div className="mb-10">
-                  <h6 className="text-[#e53e29] uppercase mb-[15px] font-bold ">
-                    ABOUT US
-                  </h6>
-                  <h1
-                    className="text-[#071c1f] 
-                  text-2xl font-sans font-bold leading-[1]  mb-[15px]
-                  min-[575px]:text-[30px] min-[767px]:text-[40px] min-[991px]:text-[50px] min-[1200px]:text-[56px] min-[1400px]:text-[60px]"
-                  >
-                    Get Amazing Service From Us.
-                  </h1>
+                  <ChildHeading title="ABOUT US" />
+                  <MainHeading title="Get Amazing Service From Us." />
                   <p
                     className="pl-[15px] min-[767px]:pl-[30px] font-open_sans font-normal leading-[1.8]
                   border-l-[2px]  border-solid border-[#e53e29] max-w-[450px] text-[#071c1f]"
@@ -316,16 +338,8 @@ const Home = () => {
             min-[992px]:flex-grow-0 min-[992px]:flex-shrink-0 min-[992px]:basis-auto  w-full min-[992px]:w-[50%]"
             >
               <div className="mb-[40px]">
-                <h6 className="text-[#e53e29] uppercase text-sm font-sans font-bold mb-[15px]">
-                  WHY CHOOSE US
-                </h6>
-                <h1
-                  className="text-[24px] mb-[15px]
-                min-[576px]:text-[30px] min-[767px]:text-[40px] 
-                min-[991px]:text-[50px] min-[1199px]:text-[56px] min-[1399px]:text-[60px] font-sans font-bold text-[#071c1f]"
-                >
-                  Safety Is Our First Priority
-                </h1>
+                <ChildHeading title="WHY CHOOSE US" />
+                <MainHeading title="Safety Is Our First Priority" />
                 <p
                   className="pl-[15px] min-[767px]:pl-[30px]  font-normal leading-[1.8]
                   border-l-[2px]  border-solid border-[#e53e29] max-w-[450px] text-[#071c1f] font-open_sans"
@@ -444,16 +458,8 @@ const Home = () => {
           <div className="flex flex-wrap -mx-[15px]">
             <div className="relative px-[15px] w-full max-w-full">
               <div className="mb-[40px] text-center">
-                <h6 className="text-[#e53e29] uppercase text-sm font-sans font-bold mb-[15px]">
-                  SERVICE
-                </h6>
-                <h1
-                  className="text-[24px] mb-[15px]
-                min-[576px]:text-[30px] min-[767px]:text-[40px] 
-                min-[991px]:text-[50px] min-[1199px]:text-[56px] min-[1399px]:text-[60px] font-sans font-bold text-white"
-                >
-                  What We Do<span className="text-[#e53e29]">.</span>
-                </h1>
+                <ChildHeading title="SERVICE" />
+                <MainHeading title="What We Do" whetherWhite={true} />
               </div>
             </div>
           </div>
@@ -588,6 +594,428 @@ const Home = () => {
                     Lorem ipsum dolor sit amet, consect
                   </p>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* PRODUCT TABLE AREA */}
+      <div className="pt-[115px] pb-[70px] bg-white">
+        <div
+          className="px-[15px] w-full mx-auto 
+        min-[576px]:max-w-[540px] min-[768px]:max-w-[720px] min-[992px]:max-w-[960px] min-[1200px]:max-w-[1200px]"
+        >
+          {/* Row */}
+          <div className="flex flex-wrap -mx-[8px]">
+            <div className="relative px-[8px] w-full max-w-full">
+              {/* Title */}
+              <div className="mb-10">
+                <ChildHeading title=" Cars" />
+                <MainHeading title="Car Best Deals" />
+              </div>
+              {/* Tab Menu */}
+              <div
+                className="static mb-[50px] uppercase flex flex-wrap
+               min-[991px]:absolute  min-[991px]:right-[15px] min-[991px]:top-0"
+              >
+                <Link
+                  href={""}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setCarsTab("newCars");
+                  }}
+                  className={`${
+                    carsTab === "newCars"
+                      ? "text-white bg-[#071c1f] border-[#071c1f]"
+                      : " text-[#071c1f] bg-[#F2F6F7]"
+                  }  font-open_sans 
+                  py-[15px] px-[25px] min-[991px]:px-[40px] min-[991px]:text-base text-sm inline-block mr-[5px] mb-[10px] font-bold`}
+                >
+                  New Cars
+                </Link>
+                <Link
+                  href={""}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setCarsTab("oldCars");
+                  }}
+                  className={`${
+                    carsTab === "oldCars"
+                      ? "text-white bg-[#071c1f] border-[#071c1f]"
+                      : " text-[#071c1f] bg-[#F2F6F7]"
+                  }   font-open_sans 
+                  py-[15px] px-[25px] min-[991px]:px-[40px] min-[991px]:text-base text-sm inline-block mr-[5px] mb-[10px] font-bold`}
+                >
+                  Old Cars
+                </Link>
+              </div>
+              {/* Tab Content */}
+              <div className="w-full">
+                {/* New Cars */}
+                <Cars
+                  carsTab={carsTab}
+                  realTab="newCars"
+                  data={[
+                    {
+                      title: "Volkswagen Polo",
+                      price: 40_000,
+                      fromPrice: 43_000,
+                      img: "https://tunatheme.com/tf/html/autixir-preview/autixir/img/product-2/9.png",
+                      year: 2018,
+                      auto: true,
+                      kph: 80,
+                    },
+                    {
+                      title: "Volkswagen Polo",
+                      price: 40_000,
+                      fromPrice: 43_000,
+                      img: "https://tunatheme.com/tf/html/autixir-preview/autixir/img/product-2/9.png",
+                      year: 2018,
+                      auto: true,
+                      kph: 80,
+                    },
+                    {
+                      title: "Volkswagen Polo",
+                      price: 40_000,
+                      fromPrice: 43_000,
+                      img: "https://tunatheme.com/tf/html/autixir-preview/autixir/img/product-2/9.png",
+                      year: 2018,
+                      auto: true,
+                      kph: 80,
+                    },
+                    {
+                      title: "Honda Freed",
+                      price: 40_000,
+                      fromPrice: 43_000,
+                      img: "https://tunatheme.com/tf/html/autixir-preview/autixir/img/product-2/10.png",
+                      year: 2019,
+                      auto: true,
+                      kph: 80,
+                    },
+                    {
+                      title: "Nissan Skyline",
+                      price: 39_000,
+                      fromPrice: 42_000,
+                      img: "https://tunatheme.com/tf/html/autixir-preview/autixir/img/product-2/6.png",
+                      year: 2019,
+                      auto: true,
+                      kph: 75,
+                    },
+                    {
+                      title: "Nissan Skyline",
+                      price: 39_000,
+                      fromPrice: 42_000,
+                      img: "https://tunatheme.com/tf/html/autixir-preview/autixir/img/product-2/6.png",
+                      year: 2019,
+                      auto: true,
+                      kph: 75,
+                    },
+                  ]}
+                />
+                {/* Old Cars */}
+                <Cars
+                  carsTab={carsTab}
+                  realTab="oldCars"
+                  data={[
+                    {
+                      title: "Volkswagen Polo",
+                      price: 40_000,
+                      fromPrice: 43_000,
+                      img: "https://tunatheme.com/tf/html/autixir-preview/autixir/img/product-2/9.png",
+                      year: 2018,
+                      auto: true,
+                      kph: 80,
+                    },
+                    {
+                      title: "Volkswagen Polo",
+                      price: 40_000,
+                      fromPrice: 43_000,
+                      img: "https://tunatheme.com/tf/html/autixir-preview/autixir/img/product-2/9.png",
+                      year: 2018,
+                      auto: true,
+                      kph: 80,
+                    },
+                    {
+                      title: "Volkswagen Polo",
+                      price: 40_000,
+                      fromPrice: 43_000,
+                      img: "https://tunatheme.com/tf/html/autixir-preview/autixir/img/product-2/9.png",
+                      year: 2018,
+                      auto: true,
+                      kph: 80,
+                    },
+                    {
+                      title: "Volkswagen Polo",
+                      price: 40_000,
+                      fromPrice: 43_000,
+                      img: "https://tunatheme.com/tf/html/autixir-preview/autixir/img/product-2/9.png",
+                      year: 2018,
+                      auto: true,
+                      kph: 80,
+                    },
+                    {
+                      title: "Volkswagen Polo",
+                      price: 40_000,
+                      fromPrice: 43_000,
+                      img: "https://tunatheme.com/tf/html/autixir-preview/autixir/img/product-2/9.png",
+                      year: 2018,
+                      auto: true,
+                      kph: 80,
+                    },
+                  ]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* CALL TO ACTİON */}
+      <div className="bg-[#e8edee] py-[20px]">
+        <div
+          className="px-[15px] w-full mx-auto 
+        min-[576px]:max-w-[540px] min-[768px]:max-w-[720px] min-[992px]:max-w-[960px] min-[1200px]:max-w-[1200px]"
+        >
+          {/* Row */}
+          <div className="mx-[-15px] flex  flex-wrap">
+            <div className="relative px-[15px] w-full max-w-full">
+              <div className="flex flex-col min-[767px]:flex-row  justify-between min-[767px]:justify-between items-center">
+                <h2 className="text-xl min-[768px]:text-[22px] min-[992px]:text-[26px] min-[1200px]:text-[30px] text-[#071c1f] font-bold leading-[1.3] font-sans">
+                  Get A Free Service Or Make A Call
+                </h2>
+                <div className="mt-[15px] min-[767px]:mt-0">
+                  <Link
+                    href={""}
+                    className="relative py-[10px] px-[20px] text-sm bg-white text-[#071c1f] shadow-[0_1px_6px_0_rgba(32,33,36,.28)]
+                    rounded-none flex items-center font-bold font-sans
+                    min-[768px]:text-base min-[768px]:py-[12px] min-[768px]:px-[25px]
+                    min-[991px]:px-[40px] min-[991px]:py-[17px]
+                    hover:bg-[#e53e29] hover:text-white z-[1] transition-all duration-300 ease-in-out
+                    after:content-[''] after:absolute after:z-[-1] after:transition-all after:duration-300 after:ease-in-out
+                    after:w-[0%] after:h-full after:top-0 after:left-0 after:bg-[#e53e29] hover:after:w-full group"
+                  >
+                    {" "}
+                    <CallSvg
+                      width={20}
+                      height={20}
+                      className="px-[2px] stroke-black relative -top-[2px] group-hover:fill-white transition-all duration-300 ease-in-out"
+                    />
+                    MAKE A CALL
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* FEATURE AREA */}
+      <div className="pt-[115px] pb-[80px] bg-white">
+        <div
+          className="px-[15px] w-full mx-auto 
+        min-[576px]:max-w-[540px] min-[768px]:max-w-[720px] min-[992px]:max-w-[960px] min-[1200px]:max-w-[1200px]"
+        >
+          {/* First */}
+          {/* Row */}
+          <div className="flex flex-wrap mx-[-15px]">
+            <div className="px-[15px] relative flex-shrink-0 w-full max-w-full">
+              <div className="block mb-[40px] min-[767px]:flex min-[767px]:justify-center min-[767px]:items-center">
+                <div>
+                  <p
+                    className="pl-[15px]  font-open_sans font-normal leading-[1.8]
+                  border-l-2  border-solid border-[#e53e29] max-w-[450px] text-[#071c1f] mb-[15px]
+                  min-[767px]:pr-[30px] min-[767px]:pl-0 min-[767px]:py-0 min-[767px]:border-l-0 min-[767px]:border-r-2
+                  min-[767px]:mr-[30px] min-[767px]:mb-0"
+                  >
+                    {" "}
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore
+                  </p>
+                </div>
+                <div className="">
+                  <ChildHeading title="WHY CHOOSE US" />
+                  <MainHeading
+                    className="max-[767px]:min-w-full min-[767px]:min-w-[320px]"
+                    title="Get Extra Benifits"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Second */}
+          {/* Row */}
+          <div className="mx-[-15px] flex flex-wrap">
+            {/* First */}
+            <div
+              className="px-[15px] relative flex-shrink-0 w-full max-w-full 
+              min-[992px]:w-[33.33333333%] min-[992px]:flex-grow-0
+            "
+            >
+              <div className="flex flex-wrap mx-[-15px] justify-center ">
+                {[
+                  {
+                    title: "Body Color",
+                    description:
+                      "Lorem ipsum dolor sit amet, consect icing elit, sed do eiusmod tempor",
+                    logo: (
+                      <EngineSvg
+                        className="fill-[#e53e29]"
+                        width={40}
+                        height={40}
+                      />
+                    ),
+                  },
+                  {
+                    title: "Glass Change",
+                    description:
+                      "Lorem ipsum dolor sit amet, consect icing elit, sed do eiusmod tempor",
+                    logo: (
+                      <CarDoorSvg
+                        className="stroke-[#e53e29]"
+                        width={40}
+                        height={40}
+                      />
+                    ),
+                  },
+                  {
+                    title: "Air Condition Repair",
+                    description:
+                      "Lorem ipsum dolor sit amet, consect icing elit, sed do eiusmod tempor",
+                    logo: (
+                      <CarburetorSvg
+                        className="fill-[#e53e29]"
+                        width={40}
+                        height={40}
+                      />
+                    ),
+                  },
+                ].map((item, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="relative px-[15px] flex-grow-0 flex-shrink-0 basis-auto w-full 
+                      min-[768px]:w-[50%] min-[992px]:w-full"
+                    >
+                      <div
+                        className="relative flex flex-row-reverse pt-[35px] px-[22px] pb-[15px] 
+                  transition-all duration-300 ease-in-out border-solid border-[2px] border-[#f4faff] mb-5
+                  before:content-[''] before:absolute before:right-[-2px] before:top-[50%] before:translate-y-[-50%]
+                    before:w-[4px] before:h-[0%] before:bg-[#e53e29] before:invisible before:opacity-0
+                    before:transition-all before:duration-500 before:ease-in-out
+                    hover:before:h-[80%] hover:before:opacity-100 hover:before:visible
+                  "
+                      >
+                        <div className="ml-5 leading-[1.5]">{item.logo}</div>
+                        <div className="">
+                          <h2
+                            className="mb-[5px] text-[#071c1f] text-xl font-bold text-right
+                           hover:text-[#e53e29] transition-all duration-300 ease-in-out"
+                          >
+                            <Link href={""} className="">
+                              {item.title}
+                            </Link>
+                          </h2>
+                          <p className="text-sm mb-[21px] text-[#071c1f] leading-[25px] font-open_sans text-right">
+                            {item.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            {/* Second */}
+            <div
+              className="px-[15px] relative flex-shrink-0 w-full max-w-full 
+              min-[992px]:w-[33.33333333%] min-[992px]:flex-grow-0
+            "
+            >
+              <div className="mb-[30px] flex justify-center">
+                <img
+                  className=""
+                  src={
+                    "https://tunatheme.com/tf/html/autixir-preview/autixir/img/others/2.png"
+                  }
+                />
+              </div>
+            </div>
+            {/* Third */}
+            <div
+              className="px-[15px] relative flex-shrink-0 w-full max-w-full 
+              min-[992px]:w-[33.33333333%] min-[992px]:flex-grow-0
+            "
+            >
+              <div className="flex flex-wrap mx-[-15px] justify-center ">
+                {[
+                  {
+                    title: "Body Color",
+                    description:
+                      "Lorem ipsum dolor sit amet, consect icing elit, sed do eiusmod tempor",
+                    logo: (
+                      <EngineSvg
+                        className="fill-[#e53e29]"
+                        width={40}
+                        height={40}
+                      />
+                    ),
+                  },
+                  {
+                    title: "Glass Change",
+                    description:
+                      "Lorem ipsum dolor sit amet, consect icing elit, sed do eiusmod tempor",
+                    logo: (
+                      <CarDoorSvg
+                        className="stroke-[#e53e29]"
+                        width={40}
+                        height={40}
+                      />
+                    ),
+                  },
+                  {
+                    title: "Air Condition Repair",
+                    description:
+                      "Lorem ipsum dolor sit amet, consect icing elit, sed do eiusmod tempor",
+                    logo: (
+                      <CarburetorSvg
+                        className="fill-[#e53e29]"
+                        width={40}
+                        height={40}
+                      />
+                    ),
+                  },
+                ].map((item, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="relative px-[15px] flex-grow-0 flex-shrink-0 basis-auto w-full 
+                      min-[768px]:w-[50%] min-[992px]:w-full"
+                    >
+                      <div
+                        className="relative flex  pt-[35px] px-[22px] pb-[15px] hover:shadow-[0_16px_32px_0_rgba(7,28,31,0.1)]
+                  transition-all duration-300 ease-in-out border-solid border-[2px] border-[#f4faff] mb-5
+                  before:content-[''] before:absolute before:left-[-2px] before:top-[50%] before:translate-y-[-50%]
+                    before:w-[4px] before:h-[0%] before:bg-[#e53e29] before:invisible before:opacity-0
+                    before:transition-all before:duration-500 before:ease-in-out
+                    hover:before:h-[80%] hover:before:opacity-100 hover:before:visible
+                  "
+                      >
+                        <div className="mr-5 leading-[1.5]">{item.logo}</div>
+                        <div className="">
+                          <h2
+                            className="mb-[5px] text-[#071c1f] text-xl font-bold text-left
+                           hover:text-[#e53e29] transition-all duration-300 ease-in-out"
+                          >
+                            <Link href={""} className="">
+                              {item.title}
+                            </Link>
+                          </h2>
+                          <p className="text-sm mb-[21px] text-[#071c1f] leading-[25px] font-open_sans text-left">
+                            {item.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
