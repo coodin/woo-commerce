@@ -92,6 +92,7 @@ const Home = () => {
       {/* First Section */}
       <div className="relative overflow-hidden">
         <video
+          playsInline={true}
           autoPlay={true}
           muted={true}
           loop={true}
