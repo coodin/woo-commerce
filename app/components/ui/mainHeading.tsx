@@ -7,12 +7,14 @@ interface MainHeadingProps
   > {
   title: string;
   whetherWhite?: boolean;
+  changeDot?: boolean;
 }
 
 const MainHeading: React.FC<MainHeadingProps> = ({
   title,
   whetherWhite = false,
   className,
+  changeDot = false,
 }) => {
   return (
     <h1
@@ -21,7 +23,9 @@ const MainHeading: React.FC<MainHeadingProps> = ({
       min-[575px]:text-[30px] min-[767px]:text-[40px] min-[991px]:text-[50px] min-[1200px]:text-[56px] min-[1400px]:text-[60px]`}
     >
       {title}
-      <span className="text-[#e53e29]">.</span>
+      <span className={`${changeDot ? "text-white" : "text-[#e53e29]"}`}>
+        .
+      </span>
     </h1>
   );
 };

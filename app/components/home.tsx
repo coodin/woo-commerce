@@ -1,4 +1,8 @@
 "use client";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 import { useEffect, useRef, useState } from "react";
 import Header from "./header";
 import MobileCartMenu from "./mobileCartMenu";
@@ -15,20 +19,15 @@ import MainHeading from "./ui/mainHeading";
 import EngineSvg from "../icons/engine";
 import CarDoorSvg from "../icons/carDoor";
 import CarburetorSvg from "../icons/carburetor";
-import Slider from "react-slick";
-
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import SettingsVariationSvg from "../icons/settingsVariation";
-import HightWaySvg from "../icons/highWay";
-import EyeSvg from "../icons/eye";
-import BasketSvg from "../icons/basket";
-import FavoriteSvg from "../icons/favorite";
-import { formatter } from "@/lib/utils";
-import Arrow from "./ui/Arrow";
-import PrevSvg from "../icons/prev";
-import NextSvg from "../icons/next";
 import Cars from "./ui/cars";
+import ImageSlider from "./image_slider";
+import CallToAction from "./callToAction";
+import Testimonial from "./testimonial";
+import Blog from "./blog";
+import Slider from "react-slick";
+import LogoArea from "./logoArea";
+import FooterArea from "./footerArea";
+import CustomArea from "./custom";
 
 const Home = () => {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
@@ -43,14 +42,6 @@ const Home = () => {
   });
 
   const [carsTab, setCarsTab] = useState<"newCars" | "oldCars">("newCars");
-  const [isHovered, setIsHovered] = useState(false);
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
@@ -1022,6 +1013,39 @@ const Home = () => {
           </div>
         </div>
       </div>
+      {/* IMAGE SLIDER AREA */}
+      <ImageSlider
+        data={[
+          {
+            imgSrc:
+              "https://tunatheme.com/tf/html/autixir-preview/autixir/img/img-slide/1.jpg",
+          },
+          {
+            imgSrc:
+              "https://tunatheme.com/tf/html/autixir-preview/autixir/img/img-slide/2.jpg",
+          },
+          {
+            imgSrc:
+              "https://tunatheme.com/tf/html/autixir-preview/autixir/img/img-slide/3.jpg",
+          },
+          {
+            imgSrc:
+              "https://tunatheme.com/tf/html/autixir-preview/autixir/img/img-slide/4.jpg",
+          },
+        ]}
+      />
+      {/* CALL TO ACTION START */}
+      <CallToAction />
+      {/* TESTIMONIAL AREA START  */}
+      <Testimonial />
+      {/*  BLOG AREA START (blog-3) */}
+      <Blog />
+      {/* BRAND LOGO AREA START  */}
+      <LogoArea />
+      {/* Custom Area */}
+      <CustomArea />
+      {/*  FOOTER AREA START (ltn__footer-2 ltn__footer-color-1)  */}
+      <FooterArea />
     </>
   );
 };

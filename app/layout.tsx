@@ -30,7 +30,7 @@ export default function RootLayout({
           rel="stylesheet"
         ></link>
       </head>
-      <body className={"font-sans"}>{children}</body>
+      <body className={"font-sans "}>{children}</body>
     </html>
   );
 }

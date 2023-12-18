@@ -30,6 +30,11 @@ type CarsProps = {
 const Cars: React.FC<CarsProps> = ({ carsTab, realTab, data }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [state, setState] = useState(false);
+  const [activeDotIndex, setActiveDotIndex] = useState<number>(0);
+
+  const handleDotClick = (index: number) => {
+    setActiveDotIndex(index);
+  };
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -59,7 +64,7 @@ const Cars: React.FC<CarsProps> = ({ carsTab, realTab, data }) => {
           <div
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            className="relative block face  group/first"
+            className="relative block   group/first"
           >
             <Slider
               dots={true}
@@ -67,7 +72,38 @@ const Cars: React.FC<CarsProps> = ({ carsTab, realTab, data }) => {
               slidesToShow={4}
               slidesToScroll={1}
               initialSlide={0}
-              appendDots={(dots) => <></>}
+              afterChange={handleDotClick}
+              appendDots={(dots) => (
+                <ul
+                  style={{
+                    position: "static",
+                    display: window.innerWidth > 990 ? "none" : "block",
+                    marginBottom: window.innerWidth > 760 ? 30 : 15,
+                    width: "100%",
+                    maxWidth: "100%",
+                    padding: 0,
+                    textAlign: "center",
+                    lineHeight: 1,
+                  }}
+                >
+                  {dots}
+                </ul>
+              )}
+              customPaging={(index) => {
+                return (
+                  <div
+                    style={{
+                      backgroundColor:
+                        activeDotIndex == index ? "#e53e29" : "#C0C0C0",
+                      display: "inline-block",
+                      height: 10,
+                      width: 10,
+                      borderRadius: 9999,
+                      cursor: "pointer",
+                    }}
+                  ></div>
+                );
+              }}
               prevArrow={
                 <Arrow
                   myStyle={{
@@ -100,7 +136,7 @@ const Cars: React.FC<CarsProps> = ({ carsTab, realTab, data }) => {
               }
               responsive={[
                 {
-                  breakpoint: 975,
+                  breakpoint: 990,
                   settings: {
                     dots: true,
                     speed: 500,
@@ -125,7 +161,7 @@ const Cars: React.FC<CarsProps> = ({ carsTab, realTab, data }) => {
             >
               {data.map((item, index) => {
                 return (
-                  <div key={index} className="block  px-2 ">
+                  <div key={index} className="block px-2">
                     <div
                       className="relative border-[2px] border-solid border-[#f6f6f6]
                       transition-all duration-300 ease-in-out mb-[50px] 

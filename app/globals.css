@@ -17,6 +17,23 @@
 }
 
 body {
+  line-height: 1.8;
+}
+
+.center .slick-slide {
+  padding-right: 15px;
+  padding-left: 15px;
+  position: relative;
+}
+
+.slick-dots li {
+  margin: 0 !important;
+  height: auto !important;
+  width: auto !important;
+  margin-right: 20px !important;
+}
+
+body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
