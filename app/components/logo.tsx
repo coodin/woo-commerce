@@ -12,7 +12,7 @@ const Logo = () => {
       <div className="flex ml-5 pl-5 relative items-center ">
         <div className="absolute left-0 top-[50%] -translate-y-[50%] h-[30px] w-[1px] bg-[#999]"></div>
         <div className="hidden min-[449px]:block mr-[10px] ">
-          <CallSvg height={35} width={35} />
+          <CallSvg className="fill-[#e53e29]" height={35} width={35} />
         </div>
         <div className="flex flex-col">
           <h6 className="text-sm font-semibold leading-tight">Get Support</h6>

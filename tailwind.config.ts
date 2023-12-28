@@ -15,15 +15,26 @@ const config: Config = {
     extend: {
       animation: {
         shake: "shake 5.33333s 0.1s infinite linear",
+        feadeInDown: "feadeInDown 300ms ease-in-out 0s normal none 1 running",
       },
       keyframes: {
         shake: {
           "0%": {
-            transform: "rotateZ(0deg) translate3d(0, 10%, 0) rotateZ(0deg)",
+            transform: "rotateZ(0deg) translate3d(0, 10%, 0)",
           },
           "100%": {
             transform:
               "rotateZ(360deg) translate3d(0, 10%, 0) rotateZ(-360deg)",
+          },
+        },
+        feadeInDown: {
+          "0%": {
+            opacity: "0",
+            transform: "translate3d(0,-100%,0)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translate3d(0,0,0)",
           },
         },
       },

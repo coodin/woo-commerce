@@ -4,32 +4,43 @@ import ChildHeading from "./ui/childHeading";
 import MainHeading from "./ui/mainHeading";
 import UpDownArrowSvg from "../icons/updownArrow";
 import DateSvg from "../icons/date";
+import CustomSelect from "./ui/customSelect";
 
 const CallToAction = () => {
-  const [open, setOpen] = useState(false);
-  const list = [
+  // const [open, setOpen] = useState(false);
+  const listOne = [
     "Service Name",
     "Care Repair",
     "Engine Repairing",
     "Oil Change",
     "Car Wash",
   ] as const;
-  const [selected, setSelected] = useState<
-    | "Service Name"
-    | "Care Repair"
-    | "Engine Repairing"
-    | "Oil Change"
-    | "Car Wash"
-  >("Service Name");
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelected(
-      event.target.value as
-        | "Service Name"
-        | "Care Repair"
-        | "Engine Repairing"
-        | "Oil Change"
-        | "Car Wash"
-    ); // Update the state with the selected value
+  const extractedList = listOne.reduce((prev, current) => {
+    return current;
+  });
+
+  // const lol2 = listOne.map((item) => item);
+  type extractedListType = typeof extractedList;
+  const [formData, setFormData] = useState<{ carWash: extractedListType }>({
+    carWash: "Service Name",
+  });
+  // const handleInputChange = (
+  //   e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  // ) => {
+  //   const { name, value } = e.target;
+  //   setFormData({
+  //     ...formData,
+  //     [name]: value,
+  //   });
+  // };
+
+  // const [selected, setSelected] =
+  //   useState<typeof extractedList>("Service Name");
+  const handleSelectChange = (item: extractedListType) => {
+    setFormData({
+      ...formData,
+      carWash: item,
+    });
   };
 
   return (
@@ -78,23 +89,43 @@ const CallToAction = () => {
                       className="px-[30px]"
                       onSubmit={(e) => {
                         e.preventDefault();
-                        console.log(selected);
+                        console.log(formData);
                       }}
                     >
                       <ul className="flex flex-col min-[767px]:flex-row items-center justify-center">
                         <li className="inline-block mr-5 mt-4">
-                          <select
+                          <CustomSelect<extractedListType>
+                            list={listOne}
+                            changeColorOfBorder={false}
+                            selectedItem={formData.carWash}
+                            selectItem={handleSelectChange}
+                            icon={
+                              <UpDownArrowSvg className="stroke-[#576466] w-[8px] h-[8px] stroke-[3]" />
+                            }
+                          />
+                        </li>
+
+                        {/* <li className="inline-block mr-5 mt-4"> */}
+                        {/* <select
+                            name="carWash"
                             className="hidden"
-                            value={selected}
-                            onChange={handleSelectChange}
+                            value={formData.carWash}
+                            onChange={handleInputChange}
                           >
-                            <option value={"Service Name"}>Service Name</option>
+                            {listOne.map((item, index) => {
+                              return (
+                                <option key={index} value={item}>
+                                  {item}
+                                </option>
+                              );
+                            })} */}
+                        {/* <option value={"Service Name"}>Service Name</option>
                             <option value={""}>Car Repair </option>
                             <option>Engine Repairing </option>
                             <option>Oil Change</option>
-                            <option>Car Wash</option>
-                          </select>
-                          <div
+                            <option>Car Wash</option> */}
+                        {/* </select> */}
+                        {/* <div
                             onClick={() => setOpen((state) => !state)}
                             className="relative bg-transparent border-[2px] border-solid border-[#576466]
                           m-0 h-[60px] w-auto min-w-[200px] leading-[58px] pr-10 pl-5 rounded-none 
@@ -112,7 +143,7 @@ const CallToAction = () => {
                               className="text-white uppercase leading-[58px] text-base font-bold font-sans
                             cursor-pointer"
                             >
-                              {selected}
+                              {formData.carWash}
                             </span>
                             <ul
                               className={`
@@ -126,12 +157,12 @@ const CallToAction = () => {
                             mt-1  overflow-hidden p-0 origin-[50%_0] 
                             transition-all duration-200 ease-[cubic-bezier(.5,0,0,1.25)] z-[9]`}
                             >
-                              {list.map((item, index) => {
+                              {listOne.map((item, index) => {
                                 return (
                                   <li
-                                    onClick={() => setSelected(item)}
+                                    onClick={() => handleSelectChange(item)}
                                     className={`${
-                                      item === selected
+                                      item === formData.carWash
                                         ? "bg-[#f6f6f6] font-bold"
                                         : " font-semibold"
                                     }
@@ -147,7 +178,7 @@ const CallToAction = () => {
                               })}
                             </ul>
                           </div>
-                        </li>
+                        </li> */}
                         <li className="inline-block mr-5 mt-4">
                           <div className="relative">
                             <input
@@ -166,6 +197,7 @@ const CallToAction = () => {
                         <li className="inline-block mr-5 mt-4">
                           <div className="">
                             <button
+                              type="submit"
                               className="relative py-[12px] px-[30px] text-sm bg-[#e53e29] text-white shadow-[0_1px_6px_0_rgba(32,33,36,.28)]
                     rounded-none flex items-center font-bold font-sans
                     min-[768px]:text-base min-[768px]:py-[15px] 

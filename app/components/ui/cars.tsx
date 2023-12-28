@@ -12,6 +12,7 @@ import { formatter } from "@/lib/utils";
 import CarSvg from "@/app/icons/car";
 import SettingsVariationSvg from "@/app/icons/settingsVariation";
 import HightWaySvg from "@/app/icons/highWay";
+import HeartSvg from "./heart";
 
 type CarsProps = {
   carsTab: "newCars" | "oldCars";
@@ -195,8 +196,9 @@ const Cars: React.FC<CarsProps> = ({ carsTab, realTab, data }) => {
                                    bg-white group-hover/item:bg-[#e53e29]  transition-all duration-300 ease-in-out"
                               >
                                 <EyeSvg
-                                  className="stroke-[#071c1f] stroke-2 min-[576px]:stroke-[1.5] w-[15px] h-[15px] min-[576px]:w-[25px] min-[576px]:h-[25px] group-hover/item:stroke-white
-                                   transition-all duration-300 ease-in-out"
+                                  className="fill-[#071c1f] 
+                                   w-[15px] h-[15px] min-[576px]:w-[22px] min-[576px]:h-[22px]
+                                   group-hover/item:fill-white transition-all duration-300 ease-in-out"
                                 />
                               </Link>
                             </li>
@@ -213,8 +215,9 @@ const Cars: React.FC<CarsProps> = ({ carsTab, realTab, data }) => {
                                   group-hover/item:bg-[#e53e29]  transition-all duration-300 ease-in-out"
                               >
                                 <BasketSvg
-                                  className="stroke-[#071c1f] stroke-2 min-[576px]:stroke-[1.5] w-[15px] h-[15px] min-[576px]:w-[25px] min-[576px]:h-[25px] group-hover/item:stroke-white
-                                  transition-all duration-300 ease-in-out "
+                                  className="fill-[#071c1f] group-hover/item:fill-white
+                                w-[15px] h-[15px] min-[576px]:w-[22px] min-[576px]:h-[22px] 
+                                transition-all duration-300 ease-in-out "
                                 />
                               </Link>
                             </li>
@@ -230,10 +233,10 @@ const Cars: React.FC<CarsProps> = ({ carsTab, realTab, data }) => {
                                 className="flex justify-center items-center w-full h-full font-bold bg-white
                                    group-hover/item:bg-[#e53e29]  transition-all duration-300 ease-in-out"
                               >
-                                <FavoriteSvg
-                                  className="stroke-[#071c1f] group-hover/item:stroke-white
+                                <HeartSvg
+                                  className="fill-[#071c1f] group-hover/item:fill-white
                                      stroke-2 min-[576px]:stroke-[1.5]
-                                      w-[15px] h-[15px] min-[576px]:w-[25px] min-[576px]:h-[25px]
+                                      w-[15px] h-[15px] min-[576px]:w-[22px] min-[576px]:h-[22px]
                                      transition-all duration-300 ease-in-out"
                                 />
                               </Link>

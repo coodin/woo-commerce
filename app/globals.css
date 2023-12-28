@@ -16,6 +16,31 @@
   }
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  color: transparent;
+  background: transparent;
+}
+
+dialog::-webkit-scrollbar {
+  display: none;
+}
+
+dialog {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 11 */
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 0s 600000s, color 0s 600000s;
+}
+
 body {
   line-height: 1.8;
 }

@@ -6,15 +6,16 @@ import Arrow from "./ui/Arrow";
 import PrevSvg from "../icons/prev";
 import NextSvg from "../icons/next";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 type ImageSliderProps = {
   data: { imgSrc: string }[];
+  onClickOfImage: (itemSrc: string) => void;
 };
 
-const ImageSlider: React.FC<ImageSliderProps> = ({ data }) => {
+const ImageSlider: React.FC<ImageSliderProps> = ({ data, onClickOfImage }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [state, setState] = useState(false);
+  const [mount, setMount] = useState(false);
   const [activeDotIndex, setActiveDotIndex] = useState<number>(0);
 
   const handleDotClick = (index: number) => {
@@ -30,9 +31,9 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ data }) => {
   };
 
   useEffect(() => {
-    setState(true);
+    setMount(true);
   }, []);
-  if (!state) {
+  if (!mount) {
     return null;
   }
   return (
@@ -155,16 +156,20 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ data }) => {
           >
             {data.map((item, index) => {
               return (
-                <div key={index} className="relative px-[15px]">
+                <div
+                  onClick={() => onClickOfImage(item.imgSrc)}
+                  key={index}
+                  className="relative px-[15px]"
+                >
                   <div className="mb-[30px] group/image">
-                    <Link href={""} className="block overflow-hidden">
+                    <div className="block overflow-hidden cursor-pointer">
                       <img
                         src={item.imgSrc}
                         className="
                         group-hover/image:scale-110
                         transition-all duration-500 ease-in-out"
                       />
-                    </Link>
+                    </div>
                   </div>
                 </div>
               );

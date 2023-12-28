@@ -1,15 +1,20 @@
 import Link from "next/link";
 import HoverElement from "./hoverElement";
 import CustomList from "./ui/customList";
+import { RefObject } from "react";
 
-const Intermediate = () => {
+type IntermediateProps = {
+  appointmentRef: RefObject<HTMLDialogElement>;
+};
+
+const Intermediate: React.FC<IntermediateProps> = ({ appointmentRef }) => {
   return (
     <div className="min-[1200px]:block hidden px-[15px]">
       <nav className="">
         <div className="">
           <ul className="flex">
-            <HoverElement text="Home+" className="group/parent">
-              <ul
+            <HoverElement href="#home" text="Home+" className="group/parent">
+              {/* <ul
                 className="absolute top-[130%] w-[510px] min-w-[230px] py-[15px] px-0 flex justify-center
                bg-white m-0 shadow-[0_5px_20px_0_rgba(23,44,82,0.1)] 
                opacity-0 group-hover/parent:opacity-100 group-hover/parent:top-full  invisible group-hover/parent:visible text-left 
@@ -124,10 +129,10 @@ const Intermediate = () => {
                   ]}
                   showTitle={true}
                 />
-              </ul>
+              </ul> */}
             </HoverElement>
-            <HoverElement text="About+" className="group/parent">
-              <ul
+            <HoverElement href="#about" text="About+" className="group/parent">
+              {/* <ul
                 className="absolute top-[130%] min-w-[230px] w-full py-[15px] px-0 flex justify-start
                bg-white m-0 shadow-[0_5px_20px_0_rgba(23,44,82,0.1)] 
                opacity-0 group-hover/parent:opacity-100 group-hover/parent:top-full  invisible group-hover/parent:visible text-left 
@@ -149,10 +154,10 @@ const Intermediate = () => {
                     { title: "Google Maps Locations", url: "10", imgUrl: "" },
                   ]}
                 />
-              </ul>
+              </ul> */}
             </HoverElement>
-            <HoverElement text="Shop+" className="group/parent">
-              <ul
+            <HoverElement href="#shop" text="Shop+" className="group/parent">
+              {/* <ul
                 className="absolute top-[130%] min-w-[230px] w-full py-[15px] px-0 flex justify-start
                bg-white m-0 shadow-[0_5px_20px_0_rgba(23,44,82,0.1)] 
                opacity-0 group-hover/parent:opacity-100 group-hover/parent:top-full  invisible group-hover/parent:visible text-left 
@@ -188,10 +193,10 @@ const Intermediate = () => {
                     { title: "Shop Car Details", url: "11", imgUrl: "" },
                   ]}
                 />
-              </ul>
+              </ul> */}
             </HoverElement>
-            <HoverElement text="News+" className="group/parent">
-              <ul
+            <HoverElement href="#news" text="News+" className="group/parent">
+              {/* <ul
                 className="absolute top-[130%] min-w-[230px] w-full py-[15px] px-0 flex justify-start
                bg-white m-0 shadow-[0_5px_20px_0_rgba(23,44,82,0.1)] 
                opacity-0 group-hover/parent:opacity-100 group-hover/parent:top-full  invisible group-hover/parent:visible text-left 
@@ -208,10 +213,14 @@ const Intermediate = () => {
                     { title: "News Details", url: "5", imgUrl: "" },
                   ]}
                 />
-              </ul>
+              </ul> */}
             </HoverElement>
-            <HoverElement text="Pages+" className="group/parent !static">
-              <ul
+            <HoverElement
+              href="#pages"
+              text="Pages+"
+              className="group/parent !static"
+            >
+              {/* <ul
                 className="absolute top-[130%] left-0 right-auto min-w-[230px] w-full py-[15px] px-0 flex justify-start
                bg-white m-0 shadow-[0_5px_20px_0_rgba(23,44,82,0.1)] 
                opacity-0 group-hover/parent:opacity-100 group-hover/parent:top-full  invisible group-hover/parent:visible 
@@ -272,17 +281,19 @@ const Intermediate = () => {
                     />
                   </Link>
                 </li>
-              </ul>
+              </ul> */}
             </HoverElement>
-            <HoverElement text="Contact" />
+            <HoverElement href="#contact" text="Contact" />
             <li className=" relative inline-block ml-[15px]">
-              <a
-                href=""
+              <button
+                onClick={() => {
+                  appointmentRef.current?.showModal();
+                }}
                 className="py-[15px] px-[20px] font-bold 
                 text-sm whitespace-nowrap inline-block bg-[#e53e29] leading-[1.8] text-[#fff]  hover:bg-[#F2F6F7] transition-all duration-300 ease-linear hover:text-[#071c1f]"
               >
                 GET APPOINTMENT
-              </a>
+              </button>
             </li>
           </ul>
         </div>

@@ -11,8 +11,6 @@ const CarDoorSvg = (props: React.SVGProps<SVGSVGElement>) => (
     <path
       d="M19 21H5a1 1 0 0 1-1-1v-8.59a1 1 0 0 1 .29-.7l7.42-7.42a1 1 0 0 1 .7-.29H19a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1ZM4.1 11H20"
       style={{
-        fill: "none",
-
         strokeLinecap: "round",
         strokeLinejoin: "round",
         strokeWidth: 2,
