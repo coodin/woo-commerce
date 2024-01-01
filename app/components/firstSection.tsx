@@ -1,4 +1,10 @@
-const FirstSection = () => {
+import { RefObject } from "react";
+
+type FirstSection = {
+  appointmentRef: RefObject<HTMLDialogElement>;
+};
+
+const FirstSection: React.FC<FirstSection> = ({ appointmentRef }) => {
   return (
     <div id="home" className="relative overflow-hidden">
       <video
@@ -8,7 +14,7 @@ const FirstSection = () => {
         loop={true}
         className="absolute left-0 top-0 w-screen min-w-full h-full object-cover"
       >
-        <source src={"/video/woo-commerce-video.mp4"} type="video/mp4"></source>
+        <source src={"/video/compresed_spyder.mp4"} type="video/mp4"></source>
       </video>
       <div
         className="relative flex justify-center items-center h-screen pt-[300px] pb-[100px] min-h-[400px]
@@ -40,6 +46,17 @@ const FirstSection = () => {
                       <br className="hidden md:block" />
                       Service Provide
                     </h1>
+                    <div className="flex justify-center min-[1200px]:hidden">
+                      <button
+                        onClick={() => {
+                          appointmentRef.current?.showModal();
+                        }}
+                        className="py-[15px] px-[20px] font-bold 
+                text-sm whitespace-nowrap inline-block bg-[#e53e29] leading-[1.8] text-[#fff]  hover:bg-[#F2F6F7] transition-all duration-300 ease-linear hover:text-[#071c1f]"
+                      >
+                        GET APPOINTMENT
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

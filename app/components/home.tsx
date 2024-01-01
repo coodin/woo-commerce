@@ -22,12 +22,16 @@ import FeatureArea from "../featureArea";
 import FirstSection from "./firstSection";
 import AppointmentProvider from "./appointmentProvider";
 import ImageProvider from "./imageProvider";
+import { BlogType, CarInformation } from "@/lib/types";
 
 const Home = () => {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
   const appointmentRef = useRef<HTMLDialogElement>(null);
-  const imageRef = useRef<HTMLDialogElement>(null);
-  const [selectedImage, setSelectedImage] = useState("");
+  const blogRef = useRef<HTMLDialogElement>(null);
+  const [carInformation, setCarInformation] = useState<CarInformation>();
+
+  // const imageRef = useRef<HTMLDialogElement>(null);
+  // const [selectedImage, setSelectedImage] = useState("");
 
   return (
     <>
@@ -35,8 +39,17 @@ const Home = () => {
         appointmentRef={appointmentRef}
         setOpenMobileMenu={setOpenMobileMenu}
       />
-      <AppointmentProvider appointmentRef={appointmentRef} />
-      <ImageProvider imageRef={imageRef} imgUrl={selectedImage} />
+      <AppointmentProvider
+        appointmentRef={appointmentRef}
+        carInformation={carInformation}
+      />
+      {/* <CarDetailsModalProvider
+        dialogRef={dialogRef}
+        carInformation={carInformation}
+        appointmentRef={appointmentRef}
+      /> */}
+
+      {/* <ImageProvider imageRef={imageRef} imgUrl={selectedImage} /> */}
 
       {/*  Utilize Mobile Menu Start */}
       {/* <MobileCartMenu
@@ -53,7 +66,7 @@ const Home = () => {
         ></div>
       )} */}
       {/* First Section */}
-      <FirstSection />
+      <FirstSection appointmentRef={appointmentRef} />
       {/* About US Area */}
       <AboutUs />
       {/* WHY CHOOSE US AREA START */}
@@ -61,17 +74,20 @@ const Home = () => {
       {/*  SERVICE AREA START (Service 1) */}
       <ServiceArea />
       {/* PRODUCT TAB AREA */}
-      <ProductTable />
+      <ProductTable
+        appointmentRef={appointmentRef}
+        setCarInformation={setCarInformation}
+      />
       {/* CALL TO ACTİON */}
       <CallAction />
       {/* FEATURE AREA */}
       <FeatureArea />
       {/* IMAGE SLIDER AREA */}
       <ImageSlider
-        onClickOfImage={(itemSrc: string) => {
-          setSelectedImage(itemSrc);
-          imageRef.current?.showModal();
-        }}
+        // onClickOfImage={(itemSrc: string) => {
+        //   setSelectedImage(itemSrc);
+        //   imageRef.current?.showModal();
+        // }}
         data={[
           {
             imgSrc:
@@ -92,7 +108,10 @@ const Home = () => {
         ]}
       />
       {/* CALL TO ACTION START */}
-      <CallToAction />
+      <CallToAction
+        appointmentRef={appointmentRef}
+        setCarInformation={setCarInformation}
+      />
       {/* TESTIMONIAL AREA START  */}
       <Testimonial />
       {/*  BLOG AREA START (blog-3) */}
@@ -102,7 +121,10 @@ const Home = () => {
       {/* Custom Area */}
       <CustomArea />
       {/*  FOOTER AREA START (ltn__footer-2 ltn__footer-color-1)  */}
-      <FooterArea />
+      <FooterArea
+        appointmentRef={appointmentRef}
+        setCarInformation={setCarInformation}
+      />
     </>
   );
 };

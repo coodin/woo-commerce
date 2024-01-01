@@ -1,28 +1,63 @@
 "use client";
-import { useState } from "react";
+import { Dispatch, RefObject, SetStateAction, useState } from "react";
 import ChildHeading from "./ui/childHeading";
 import MainHeading from "./ui/mainHeading";
 import UpDownArrowSvg from "../icons/updownArrow";
 import DateSvg from "../icons/date";
 import CustomSelect from "./ui/customSelect";
+import AnimatedButton from "./ui/animatedButton";
+import {
+  CarInformation,
+  extractedMakeListType,
+  extractedModelListType,
+  makeList,
+  modelList,
+  newCars,
+} from "@/lib/types";
 
-const CallToAction = () => {
+type CallToActionProps = {
+  appointmentRef: RefObject<HTMLDialogElement>;
+  setCarInformation: Dispatch<SetStateAction<CarInformation | undefined>>;
+};
+
+const CallToAction: React.FC<CallToActionProps> = ({
+  appointmentRef,
+  setCarInformation,
+}) => {
   // const [open, setOpen] = useState(false);
-  const listOne = [
-    "Service Name",
-    "Care Repair",
-    "Engine Repairing",
-    "Oil Change",
-    "Car Wash",
-  ] as const;
-  const extractedList = listOne.reduce((prev, current) => {
-    return current;
-  });
+  // const listOne = [
+  //   "Service Name",
+  //   "Care Repair",
+  //   "Engine Repairing",
+  //   "Oil Change",
+  //   "Car Wash",
+  // ] as const;
+  // const extractedList = listOne.reduce((prev, current) => {
+  //   return current;
+  // });
+
+  const handleMake = (item: extractedMakeListType) => {
+    setFormData({
+      ...formData,
+      make: item,
+    });
+  };
+
+  const handleModel = (item: extractedModelListType) => {
+    setFormData({
+      ...formData,
+      model: item,
+    });
+  };
 
   // const lol2 = listOne.map((item) => item);
-  type extractedListType = typeof extractedList;
-  const [formData, setFormData] = useState<{ carWash: extractedListType }>({
-    carWash: "Service Name",
+  // type extractedListType = typeof extractedList;
+  const [formData, setFormData] = useState<{
+    make: extractedMakeListType;
+    model: extractedModelListType;
+  }>({
+    make: "Make",
+    model: "Model",
   });
   // const handleInputChange = (
   //   e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -36,12 +71,12 @@ const CallToAction = () => {
 
   // const [selected, setSelected] =
   //   useState<typeof extractedList>("Service Name");
-  const handleSelectChange = (item: extractedListType) => {
-    setFormData({
-      ...formData,
-      carWash: item,
-    });
-  };
+  // const handleSelectChange = (item: extractedListType) => {
+  //   setFormData({
+  //     ...formData,
+  //     carWash: item,
+  //   });
+  // };
 
   return (
     <div className="bg-white">
@@ -89,16 +124,31 @@ const CallToAction = () => {
                       className="px-[30px]"
                       onSubmit={(e) => {
                         e.preventDefault();
-                        console.log(formData);
+                        const car = newCars.find(
+                          (item) => item.make === formData.make && item.model
+                        );
+                        setCarInformation(car);
+                        appointmentRef.current?.showModal();
                       }}
                     >
                       <ul className="flex flex-col min-[767px]:flex-row items-center justify-center">
                         <li className="inline-block mr-5 mt-4">
-                          <CustomSelect<extractedListType>
-                            list={listOne}
+                          <CustomSelect
+                            list={makeList}
                             changeColorOfBorder={false}
-                            selectedItem={formData.carWash}
-                            selectItem={handleSelectChange}
+                            selectedItem={formData.make}
+                            selectItem={handleMake}
+                            icon={
+                              <UpDownArrowSvg className="stroke-[#576466] w-[8px] h-[8px] stroke-[3]" />
+                            }
+                          />
+                        </li>
+                        <li className="inline-block mr-5 mt-4">
+                          <CustomSelect
+                            list={modelList}
+                            changeColorOfBorder={false}
+                            selectedItem={formData.model}
+                            selectItem={handleModel}
                             icon={
                               <UpDownArrowSvg className="stroke-[#576466] w-[8px] h-[8px] stroke-[3]" />
                             }
@@ -179,7 +229,7 @@ const CallToAction = () => {
                             </ul>
                           </div>
                         </li> */}
-                        <li className="inline-block mr-5 mt-4">
+                        {/* <li className="inline-block mr-5 mt-4">
                           <div className="relative">
                             <input
                               type="text"
@@ -193,21 +243,16 @@ const CallToAction = () => {
                             w-4 h-4  fill-white"
                             />
                           </div>
-                        </li>
+                        </li> */}
                         <li className="inline-block mr-5 mt-4">
                           <div className="">
                             <button
-                              type="submit"
-                              className="relative py-[12px] px-[30px] text-sm bg-[#e53e29] text-white shadow-[0_1px_6px_0_rgba(32,33,36,.28)]
-                    rounded-none flex items-center font-bold font-sans
-                    min-[768px]:text-base min-[768px]:py-[15px] 
-                    min-[991px]:px-[40px] min-[991px]:py-[17px]
-                     hover:text-[#071c1f] z-[1] transition-all duration-300 ease-in-out
-                    after:content-[''] after:absolute after:z-[-1] after:transition-all after:duration-300 after:ease-in-out
-                    after:w-[0%] after:h-full after:top-0 after:left-0 after:bg-white hover:after:w-full group
-                    uppercase"
+                              className="py-5 px-8 font-bold text-sm whitespace-nowrap
+                    inline-block bg-[#e53e29] leading-[1.8]
+                  text-[#fff]  hover:bg-[#F2F6F7] transition-all duration-300 ease-linear
+                   hover:text-[#071c1f]"
                             >
-                              Check Availability
+                              GET APPOINTMENT
                             </button>
                           </div>
                         </li>

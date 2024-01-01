@@ -1,4 +1,4 @@
-import { RefObject, useRef, useState } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 import CustomDialog from "./ui/customDialog";
 import CustomInput from "./ui/customInput";
 import ProfileVersionSvg from "../icons/profileVersion";
@@ -8,13 +8,24 @@ import CustomSelect from "./ui/customSelect";
 import CustomSubHeader from "./ui/customSubHeader";
 import PencilSvg from "../icons/pencil";
 import DateSvg from "../icons/date";
+import {
+  CarInformation,
+  extractedMakeListType,
+  extractedModelListType,
+  extractedYearListType,
+  makeList,
+  modelList,
+  yearList,
+} from "@/lib/types";
 
 type AppointmentProviderProps = {
   appointmentRef: RefObject<HTMLDialogElement>;
+  carInformation?: CarInformation;
 };
 
 const AppointmentProvider: React.FC<AppointmentProviderProps> = ({
   appointmentRef,
+  carInformation,
 }) => {
   const dateRef = useRef<HTMLInputElement>(null);
   const openDatePicker = () => {
@@ -35,9 +46,9 @@ const AppointmentProvider: React.FC<AppointmentProviderProps> = ({
       [name]: value,
     });
   };
-
-  const makeList = ["Make", "Audi", "BMW", "Honda", "Nissan"] as const;
-  type extractedMakeListType = (typeof makeList)[number];
+  useEffect(() => {
+    console.log(carInformation);
+  }, [carInformation]);
 
   const handleMake = (item: extractedMakeListType) => {
     setFormData({
@@ -46,34 +57,12 @@ const AppointmentProvider: React.FC<AppointmentProviderProps> = ({
     });
   };
 
-  const modelList = [
-    "Model",
-    "Any",
-    "6 Series(1)",
-    "7 Series(1)",
-    "8 Series(1)",
-  ] as const;
-
-  type extractedModelListType = (typeof modelList)[number];
-
   const handleModel = (item: extractedModelListType) => {
     setFormData({
       ...formData,
       model: item,
     });
   };
-
-  const yearList = [
-    "Year",
-    "2015",
-    "2016",
-    "2017",
-    "2018",
-    "2019",
-    "2020",
-  ] as const;
-
-  type extractedYearListType = (typeof yearList)[number];
 
   const handleYear = (item: extractedYearListType) => {
     setFormData({
@@ -272,7 +261,11 @@ const AppointmentProvider: React.FC<AppointmentProviderProps> = ({
                 className=""
                 classNameForItem="!text-[#071c1f] !font-open_sans !text-sm "
                 list={makeList}
-                selectedItem={formData.make}
+                selectedItem={
+                  formData.make === "Make"
+                    ? carInformation?.make ?? "Make"
+                    : formData.make
+                }
                 selectItem={handleMake}
               />
             </div>
@@ -280,7 +273,11 @@ const AppointmentProvider: React.FC<AppointmentProviderProps> = ({
               <CustomSelect
                 classNameForItem="!text-[#071c1f] !font-open_sans !text-sm "
                 list={modelList}
-                selectedItem={formData.model}
+                selectedItem={
+                  formData.model === "Model"
+                    ? carInformation?.model ?? "Model"
+                    : formData.model
+                }
                 selectItem={handleModel}
               />
             </div>
@@ -288,7 +285,11 @@ const AppointmentProvider: React.FC<AppointmentProviderProps> = ({
               <CustomSelect
                 classNameForItem="!text-[#071c1f] !font-open_sans !text-sm "
                 list={yearList}
-                selectedItem={formData.year}
+                selectedItem={
+                  formData.year === "Year"
+                    ? carInformation?.year ?? "Year"
+                    : formData.year
+                }
                 selectItem={handleYear}
               />
             </div>

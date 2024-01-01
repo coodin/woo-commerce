@@ -18,7 +18,7 @@ const Logo = () => {
           <h6 className="text-sm font-semibold leading-tight">Get Support</h6>
           <h4 className="mt-[5px] text-xl font-bold leading-none">
             <Link
-              href={""}
+              href={"tel:05462684018"}
               className="text-base md:text-lg not-italic leading-none font-bold hover:text-[#e53e29] transition-all ease-linear duration-300"
             >
               123-456-789-10

@@ -1,12 +1,68 @@
 import Link from "next/link";
 import ChildHeading from "./ui/childHeading";
-import MainHeading from "./ui/mainHeading";
 import DateSvg from "../icons/date";
 import { convertDate } from "@/lib/utils";
+import {
+  BlogType,
+  CarInformation,
+  FooterType,
+  blogList,
+  newCars,
+  oldCars,
+} from "@/lib/types";
+import { Dispatch, RefObject, SetStateAction, useRef, useState } from "react";
+import BlogModalProvider from "./blogModelProvider";
+import CarDetailsModalProvider from "./carDetailsModalProvider";
+import FooterModalProvider from "./footerModalProvider";
 
-const FooterArea = () => {
+type FooterAreaProps = {
+  appointmentRef: RefObject<HTMLDialogElement>;
+  setCarInformation: Dispatch<SetStateAction<CarInformation | undefined>>;
+};
+
+const FooterArea: React.FC<FooterAreaProps> = ({
+  appointmentRef,
+  setCarInformation,
+}) => {
+  const [blog, setBlog] = useState<BlogType | undefined>(undefined);
+  const blogRef = useRef<HTMLDialogElement>(null);
+  const footerRef = useRef<HTMLDialogElement>(null);
+  const carRef = useRef<HTMLDialogElement>(null);
+  const [carInformationInside, setCarInformationInside] =
+    useState<CarInformation>();
+  const footerList: FooterType[] = [
+    {
+      name: "Terms & Conditions",
+      description: `  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit tempora
+    maxime non pariatur deleniti. Accusamus iusto sed accusantium temporibus
+    fuga delectus blanditiis maxime, corporis provident id quam ipsam ab eos!`,
+    },
+    {
+      name: "Claim",
+      description: `  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit tempora
+    maxime non pariatur deleniti. Accusamus iusto sed accusantium temporibus
+    fuga delectus blanditiis maxime, corporis provident id quam ipsam ab eos!`,
+    },
+    {
+      name: "Privacy & Policy",
+      description: `  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit tempora
+    maxime non pariatur deleniti. Accusamus iusto sed accusantium temporibus
+    fuga delectus blanditiis maxime, corporis provident id quam ipsam ab eos!`,
+    },
+  ];
+  const [footerItem, setFooterItem] = useState<FooterType>();
   return (
     <footer className="">
+      <BlogModalProvider dialogRef={blogRef} blog={blog} />
+      <CarDetailsModalProvider
+        dialogRef={carRef}
+        carInformation={carInformationInside}
+        appointmentRef={appointmentRef}
+      />
+      <FooterModalProvider
+        footerItem={footerItem}
+        footerDialogRef={footerRef}
+      />
       <div className="pt-[120px] pb-5 bg-[#071c1f]">
         <div
           className="px-[15px] w-full mx-auto 
@@ -77,30 +133,27 @@ const FooterArea = () => {
 
                 <div className="w-full min-[575px]:w-[50%]">
                   <ul className="">
-                    {[
-                      { name: "Engine Diagnostics", url: "" },
-                      { name: "Vehicles Damaged", url: "" },
-                      { name: "Air Conditioning Evac", url: "" },
-                      { name: "Anti Lock Brake Service", url: "" },
-                      { name: "Computer Diagnostics", url: "" },
-                      { name: "Performance Upgrades", url: "" },
-                    ].map((item, index) => {
+                    {newCars.map((item, index) => {
                       return (
                         <li
                           key={index}
                           className="relative mb-5 text-[#ACD2D8] font-semibold text-sm  min-[767px]:text-base group"
                         >
-                          <Link
+                          <button
+                            onClick={() => {
+                              setCarInformation(item);
+                              setCarInformationInside(item);
+                              carRef.current?.showModal();
+                            }}
                             className="relative font-open_sans transition-all duration-300 ease-in-out hover:text-[#e53e29]
                             before:absolute before:content-['//'] before:left-0 before:top-[50%]
                              before:translate-y-[-50%] before:transition-[inherit] before:opacity-0 before:invisible
                              before:ml-[-20px] before:text-[#e53e29] 
                              group-hover:before:opacity-100 group-hover:before:visible group-hover:before:ml-0
                              group-hover:pl-5"
-                            href={item.url}
                           >
-                            {item.name}
-                          </Link>
+                            {item.title}
+                          </button>
                         </li>
                       );
                     })}
@@ -108,29 +161,28 @@ const FooterArea = () => {
                 </div>
                 <div className="w-full ml-0 min-[575px]:pl-5  min-[575px]:w-[50%]">
                   <ul className="">
-                    {[
-                      { name: "Car Wash & Cleaning", url: "" },
-                      { name: "Choose your Repairs", url: "" },
-                      { name: "Free Consultancy", url: "" },
-                      { name: "Emergency Time", url: "" },
-                    ].map((item, index) => {
+                    {oldCars.map((item, index) => {
                       return (
                         <li
                           key={index}
-                          className="relative mb-5 min-[767px]:mb-[30px] text-[#ACD2D8] font-semibold text-sm
+                          className="relative mb-5 text-[#ACD2D8] font-semibold text-sm
                           min-[767px]:text-base group"
                         >
-                          <Link
+                          <button
+                            onClick={() => {
+                              setCarInformation(item);
+                              setCarInformationInside(item);
+                              carRef.current?.showModal();
+                            }}
                             className="relative font-open_sans transition-all duration-300 ease-in-out hover:text-[#e53e29]
                             before:absolute before:content-['//'] before:left-0 before:top-[50%]
                              before:translate-y-[-50%] before:transition-[inherit] before:opacity-0 before:invisible
                              before:ml-[-20px] before:text-[#e53e29] 
                              group-hover:before:opacity-100 group-hover:before:visible group-hover:before:ml-0
                              group-hover:pl-5"
-                            href={item.url}
                           >
-                            {item.name}
-                          </Link>
+                            {item.title}
+                          </button>
                         </li>
                       );
                     })}
@@ -148,26 +200,14 @@ const FooterArea = () => {
                 <h4 className="text-2xl text-white mb-[25px] font-bold">
                   News Feeds.
                 </h4>{" "}
-                {[
-                  {
-                    date: new Date(),
-                    description:
-                      "The branch of biology that deals with the normal.",
-                  },
-                  {
-                    date: new Date(),
-                    description:
-                      "Electric Car Maintenance, Servicing & Repairs",
-                  },
-                  {
-                    date: new Date(),
-                    description:
-                      "The branch of biology that deals with the normal.",
-                  },
-                ].map((item, index) => {
+                {blogList.slice(0, 3).map((blog, index) => {
                   return (
                     <div
                       key={index}
+                      onClick={() => {
+                        setBlog(blog);
+                        blogRef.current?.showModal();
+                      }}
                       className="border-b border-solid border-[#103034] mb-5"
                     >
                       <div className="mb-[5px]">
@@ -177,17 +217,17 @@ const FooterArea = () => {
                           font-bold mt-0 "
                           >
                             <DateSvg className="w-3 h-3 fill-[#e53e29] mr-[5px]" />
-                            {convertDate(item.date)}
+                            {convertDate(blog.date)}
                           </li>
                         </ul>
                       </div>
                       <h4 className="text-lg text-white min-[767px]:text-[20px] mb-5">
-                        <Link
-                          className="hover:text-[#e53e29]  transition-all duration-300 ease-in-out font-bold"
-                          href={""}
+                        <button
+                          onClick={() => setBlog(blog)}
+                          className="hover:text-[#e53e29] text-left  transition-all duration-300 ease-in-out font-bold"
                         >
-                          {item.description}
-                        </Link>
+                          {blog.title}
+                        </button>
                       </h4>
                     </div>
                   );
@@ -235,22 +275,21 @@ const FooterArea = () => {
             <div className="relative w-full min-[768px]:w-[50%] max-w-full flex-shrink-0 flex-grow-0 basis-auto px-[15px] self-center">
               <div className="text-center  mt-[25px]  min-[768px]:mt-0">
                 <ul className="flex justify-center space-x-[20px] items-center min-[991px]:justify-end">
-                  {[
-                    { name: "Terms & Conditions", href: "" },
-                    { name: "Claim", href: "" },
-                    { name: "Privacy & Policy", href: "" },
-                  ].map((item, index) => {
+                  {footerList.map((item, index) => {
                     return (
                       <li
                         key={index}
                         className="inline-block  text-sm font-bold text-white "
                       >
-                        <Link
+                        <button
+                          onClick={() => {
+                            setFooterItem(item);
+                            footerRef.current?.showModal();
+                          }}
                           className="m-0 hover:text-[#e53e29] transition-all duration-300 ease-in-out"
-                          href={item.href}
                         >
                           {item.name}
-                        </Link>
+                        </button>
                       </li>
                     );
                   })}

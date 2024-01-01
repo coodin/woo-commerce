@@ -202,14 +202,14 @@ const AboutUs = () => {
                min-[768px]:text-[22px] min-[992px]:text-[26px] min-[1199px]:text-[30px] text-[#071c1f]"
                   >
                     <Link
-                      href={""}
+                      href={"tel:05462684018"}
                       className="text-inherit  hover:text-[#e53e29] transition-all duration-300 ease-in-out "
                     >
                       507-452-1254
                     </Link>
                     <small className="text-[0.875em] mx-2">or</small>
                     <Link
-                      href={""}
+                      href={"tel:05462684018"}
                       className="text-inherit  hover:text-[#e53e29] transition-all duration-300 ease-in-out"
                     >
                       508-452-1253

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ChildHeading from "./ui/childHeading";
 import MainHeading from "./ui/mainHeading";
 import Slider from "react-slick";
@@ -8,10 +8,16 @@ import ProfileSvg from "../icons/profile";
 import ServiceSvg from "../icons/service";
 import DateSvg from "../icons/date";
 import { convertDate } from "@/lib/utils";
+import { BlogType, blogList } from "@/lib/types";
+import BlogModalProvider from "./blogModelProvider";
 
-const Blog = () => {
+type BlogProps = {};
+
+const Blog: React.FC<BlogProps> = ({}) => {
   const [mount, setMount] = useState(false);
   const [activeDotIndex, setActiveDotIndex] = useState<number>(0);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const [blog, setBlog] = useState<BlogType | undefined>(undefined);
 
   const handleDotClick = (index: number) => {
     setActiveDotIndex(index);
@@ -37,6 +43,7 @@ const Blog = () => {
       className="bg-[url(https://tunatheme.com/tf/html/autixir-preview/autixir/img/bg/3.jpg)] 
     bg-auto bg-[top_center] bg-no-repeat pt-[115px]"
     >
+      <BlogModalProvider dialogRef={dialogRef} blog={blog} />
       {/* Container */}
       <div
         className="px-[15px] w-full mx-auto 
@@ -122,68 +129,23 @@ const Blog = () => {
               );
             }}
           >
-            {[
-              {
-                role: "Admin",
-                service: "Services",
-                description: "Electric Car Maintenance, Servicing & Repairs",
-                imageUrl:
-                  "https://tunatheme.com/tf/html/autixir-preview/autixir/img/blog/4.jpg",
-                date: new Date(),
-              },
-              {
-                role: "Admin",
-                service: "Services",
-                description: "Electric Car Maintenance, Servicing & Repairs",
-                imageUrl:
-                  "https://tunatheme.com/tf/html/autixir-preview/autixir/img/blog/4.jpg",
-                date: new Date(),
-              },
-              {
-                role: "Admin",
-                service: "Services",
-                description: "Electric Car Maintenance, Servicing & Repairs",
-                imageUrl:
-                  "https://tunatheme.com/tf/html/autixir-preview/autixir/img/blog/4.jpg",
-                date: new Date(),
-              },
-              {
-                role: "Admin",
-                service: "Services",
-                description: "Electric Car Maintenance, Servicing & Repairs",
-                imageUrl:
-                  "https://tunatheme.com/tf/html/autixir-preview/autixir/img/blog/4.jpg",
-                date: new Date(),
-              },
-              {
-                role: "Admin",
-                service: "Services",
-                description: "Electric Car Maintenance, Servicing & Repairs",
-                imageUrl:
-                  "https://tunatheme.com/tf/html/autixir-preview/autixir/img/blog/4.jpg",
-                date: new Date(),
-              },
-              {
-                role: "Admin",
-                service: "Services",
-                description: "How to: Make Your Tires Last Longer",
-                imageUrl:
-                  "https://tunatheme.com/tf/html/autixir-preview/autixir/img/blog/5.jpg",
-                date: new Date(),
-              },
-            ].map((item, index) => {
+            {blogList.map((blog, index) => {
               return (
-                <div key={index} className="relative mb-[30px] group">
+                <div
+                  onClick={() => {
+                    setBlog(blog);
+                    dialogRef.current?.showModal();
+                  }}
+                  key={index}
+                  className="relative mb-[30px] cursor-pointer group"
+                >
                   <div className="relative overflow-hidden">
-                    <Link
-                      className="transition-all duration-500 ease-in-out"
-                      href={""}
-                    >
+                    <div className="transition-all duration-500 ease-in-out">
                       <img
                         className="group-hover:scale-110 transition-all duration-500 ease-in-out"
-                        src={item.imageUrl}
+                        src={blog.imageUrl}
                       />
-                    </Link>{" "}
+                    </div>{" "}
                   </div>{" "}
                   <div
                     className="mt-[-50px] relative w-[calc(100%_-30px)] shadow-[0_5px_20px_0_rgba(23,44,82,0.1)]
@@ -192,48 +154,41 @@ const Blog = () => {
                     <div className="mb-[15px]">
                       <ul className="">
                         <li className="relative text-[12px] min-[767px]:text-sm mr-[10px] min-[767px]:mr-[25px] font-bold inline-block text-[#071c1f]">
-                          <Link
+                          <button
                             className="flex items-center hover:text-[#e53e29] 
                             transition-all duration-300 ease-in-out "
-                            href={""}
                           >
                             <ProfileSvg className="w-[12px] h-[12px] fill-[#e53e29] mr-[5px]" />
-                            by:{item.role}
-                          </Link>
+                            by:{blog.role}
+                          </button>
                         </li>
                         <li className="relative text-[12px] min-[767px]:text-sm  font-bold inline-block text-[#071c1f] ">
-                          <Link
+                          <button
                             className="flex items-center hover:text-[#e53e29]
                              transition-all duration-300 ease-in-out"
-                            href={""}
                           >
                             <ServiceSvg className="w-[12px] h-[12px] fill-[#e53e29] mr-[5px]" />
-                            {item.service}
-                          </Link>
+                            {blog.service}
+                          </button>
                         </li>
                       </ul>
                     </div>
                     <h3 className="text-[#071c1f] font-bold mb-5 text-lg min-[762px]:text-[22px] min-[991px]:text-[26px]">
-                      <Link
-                        className="hover:text-[#e53e29] transition-all duration-300 ease-in-out"
-                        href={""}
-                      >
-                        Common Engine Oil Problems and Solutions
-                      </Link>
+                      <button className="hover:text-[#e53e29] transition-all duration-300 ease-in-out">
+                        {blog.title}
+                      </button>
                     </h3>
                     <div className="flex justify-between items-center border-t border-solid border-[#e5eaee] pt-5">
                       <div className="">
                         <ul>
                           <li className="flex items-center relative text-[12px] min-[767px]:text-sm text-[#071c1f] font-bold ">
                             <DateSvg className="w-3 h-3 fill-[#e53e29] mr-[5px]" />
-                            {convertDate(item.date)}
+                            {convertDate(blog.date)}
                           </li>
                         </ul>
                       </div>
                       <div className="text-sm min-[767px]:text-sm font-bold text-[#e53e29] uppercase">
-                        <Link className="" href={""}>
-                          Read more
-                        </Link>
+                        <button className="">Read more</button>
                       </div>
                     </div>
                   </div>

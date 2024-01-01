@@ -28,7 +28,7 @@ const CustomDialog: React.FC<CustomDialogProps> = ({
   return (
     <dialog
       ref={dialogRef}
-      className={`${className}
+      className={`${className} 
       `}
     >
       {children}

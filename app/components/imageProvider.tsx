@@ -1,7 +1,6 @@
 "use client";
 import { RefObject, useEffect, useMemo, useState } from "react";
 import CustomDialog from "./ui/customDialog";
-import CloseVersionSvg from "../icons/closeVersion";
 
 type ImageProviderProps = {
   imgUrl: string;
@@ -39,7 +38,8 @@ const ImageProvider: React.FC<ImageProviderProps> = ({ imgUrl, imageRef }) => {
   return (
     <div className="">
       <CustomDialog
-        className=" w-[50%] min-h-[50vh] min-w-[50vh] max-h-[50vh] aspect-[5/6]  mx-auto my-auto backdrop:!bg-[#333] backdrop:opacity-90
+        className=" w-[50%] min-h-[50vh] min-w-[50vh] max-h-[50vh] aspect-[5/6]  mx-auto my-auto
+         backdrop:!bg-[#333] backdrop:opacity-90
         min-[768px]:aspect-square min-[992px]:aspect-[1/4] min-[768px]:max-h-[70vh]
         "
         dialogRef={imageRef}

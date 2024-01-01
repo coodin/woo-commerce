@@ -27,8 +27,8 @@ const Arrow: React.FC<ArrowProps> = ({ onClick, children, myStyle }) => {
       onClick={onClick}
       style={myStyle}
       className={`
-     !absolute !top-[50%] hover:!bg-[#e53e29] !bg-white before:hidden group/arrow
-                         !translate-y-[-50%] !w-[50px] !h-[50px] !leading-[48px] 
+     !absolute !top-[50%] -translate-y-[50%] hover:!bg-[#e53e29] !bg-white before:hidden group/arrow
+                        !w-[50px] !h-[50px] !leading-[48px] 
                         !border !border-solid !border-[#e6ecf0] !rounded-full !text-center
                        !text-xl !text-[#071c1f] !z-[1]
                        transition-all duration-300 ease-in-out

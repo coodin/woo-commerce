@@ -13,7 +13,19 @@ const Intermediate: React.FC<IntermediateProps> = ({ appointmentRef }) => {
       <nav className="">
         <div className="">
           <ul className="flex">
-            <HoverElement href="#home" text="Home+" className="group/parent">
+            <HoverElement
+              onClickForButton={() => {
+                const element = document.getElementById("home");
+                if (element) {
+                  window.scrollTo({
+                    top: element.offsetTop,
+                    behavior: "smooth",
+                  });
+                }
+              }}
+              text="Home+"
+              className="group/parent"
+            >
               {/* <ul
                 className="absolute top-[130%] w-[510px] min-w-[230px] py-[15px] px-0 flex justify-center
                bg-white m-0 shadow-[0_5px_20px_0_rgba(23,44,82,0.1)] 
@@ -131,7 +143,19 @@ const Intermediate: React.FC<IntermediateProps> = ({ appointmentRef }) => {
                 />
               </ul> */}
             </HoverElement>
-            <HoverElement href="#about" text="About+" className="group/parent">
+            <HoverElement
+              onClickForButton={() => {
+                const element = document.getElementById("about");
+                if (element) {
+                  window.scrollTo({
+                    top: element.offsetTop,
+                    behavior: "smooth",
+                  });
+                }
+              }}
+              text="About+"
+              className="group/parent"
+            >
               {/* <ul
                 className="absolute top-[130%] min-w-[230px] w-full py-[15px] px-0 flex justify-start
                bg-white m-0 shadow-[0_5px_20px_0_rgba(23,44,82,0.1)] 
@@ -156,7 +180,19 @@ const Intermediate: React.FC<IntermediateProps> = ({ appointmentRef }) => {
                 />
               </ul> */}
             </HoverElement>
-            <HoverElement href="#shop" text="Shop+" className="group/parent">
+            <HoverElement
+              onClickForButton={() => {
+                const element = document.getElementById("shop");
+                if (element) {
+                  window.scrollTo({
+                    top: element.offsetTop,
+                    behavior: "smooth",
+                  });
+                }
+              }}
+              text="Shop+"
+              className="group/parent"
+            >
               {/* <ul
                 className="absolute top-[130%] min-w-[230px] w-full py-[15px] px-0 flex justify-start
                bg-white m-0 shadow-[0_5px_20px_0_rgba(23,44,82,0.1)] 
@@ -195,7 +231,19 @@ const Intermediate: React.FC<IntermediateProps> = ({ appointmentRef }) => {
                 />
               </ul> */}
             </HoverElement>
-            <HoverElement href="#news" text="News+" className="group/parent">
+            <HoverElement
+              onClickForButton={() => {
+                const element = document.getElementById("news");
+                if (element) {
+                  window.scrollTo({
+                    top: element.offsetTop,
+                    behavior: "smooth",
+                  });
+                }
+              }}
+              text="News+"
+              className="group/parent"
+            >
               {/* <ul
                 className="absolute top-[130%] min-w-[230px] w-full py-[15px] px-0 flex justify-start
                bg-white m-0 shadow-[0_5px_20px_0_rgba(23,44,82,0.1)] 
@@ -216,7 +264,15 @@ const Intermediate: React.FC<IntermediateProps> = ({ appointmentRef }) => {
               </ul> */}
             </HoverElement>
             <HoverElement
-              href="#pages"
+              onClickForButton={() => {
+                const element = document.getElementById("pages");
+                if (element) {
+                  window.scrollTo({
+                    top: element.offsetTop,
+                    behavior: "smooth",
+                  });
+                }
+              }}
               text="Pages+"
               className="group/parent !static"
             >
@@ -283,8 +339,19 @@ const Intermediate: React.FC<IntermediateProps> = ({ appointmentRef }) => {
                 </li>
               </ul> */}
             </HoverElement>
-            <HoverElement href="#contact" text="Contact" />
-            <li className=" relative inline-block ml-[15px]">
+            <HoverElement
+              onClickForButton={() => {
+                const element = document.getElementById("contact");
+                if (element) {
+                  window.scrollTo({
+                    top: element.offsetTop - 80,
+                    behavior: "smooth",
+                  });
+                }
+              }}
+              text="Contact"
+            />
+            <li className="relative inline-block ml-[15px]">
               <button
                 onClick={() => {
                   appointmentRef.current?.showModal();

@@ -2,9 +2,18 @@ import Link from "next/link";
 import Cars from "./components/ui/cars";
 import ChildHeading from "./components/ui/childHeading";
 import MainHeading from "./components/ui/mainHeading";
-import { useState } from "react";
+import { Dispatch, RefObject, SetStateAction, useState } from "react";
+import { CarInformation, newCars, oldCars } from "@/lib/types";
 
-const ProductTable = () => {
+type ProductTableProps = {
+  appointmentRef: RefObject<HTMLDialogElement>;
+  setCarInformation: Dispatch<SetStateAction<CarInformation | undefined>>;
+};
+
+const ProductTable: React.FC<ProductTableProps> = ({
+  appointmentRef,
+  setCarInformation,
+}) => {
   const [carsTab, setCarsTab] = useState<"newCars" | "oldCars">("newCars");
   return (
     <div id="pages" className="pt-[115px] pb-[70px] bg-white">
@@ -60,116 +69,19 @@ const ProductTable = () => {
             <div className="w-full">
               {/* New Cars */}
               <Cars
+                setCarInformation={setCarInformation}
+                appointmentRef={appointmentRef}
                 carsTab={carsTab}
                 realTab="newCars"
-                data={[
-                  {
-                    title: "Volkswagen Polo",
-                    price: 40_000,
-                    fromPrice: 43_000,
-                    img: "https://tunatheme.com/tf/html/autixir-preview/autixir/img/product-2/9.png",
-                    year: 2018,
-                    auto: true,
-                    kph: 80,
-                  },
-                  {
-                    title: "Volkswagen Polo",
-                    price: 40_000,
-                    fromPrice: 43_000,
-                    img: "https://tunatheme.com/tf/html/autixir-preview/autixir/img/product-2/9.png",
-                    year: 2018,
-                    auto: true,
-                    kph: 80,
-                  },
-                  {
-                    title: "Volkswagen Polo",
-                    price: 40_000,
-                    fromPrice: 43_000,
-                    img: "https://tunatheme.com/tf/html/autixir-preview/autixir/img/product-2/9.png",
-                    year: 2018,
-                    auto: true,
-                    kph: 80,
-                  },
-                  {
-                    title: "Honda Freed",
-                    price: 40_000,
-                    fromPrice: 43_000,
-                    img: "https://tunatheme.com/tf/html/autixir-preview/autixir/img/product-2/10.png",
-                    year: 2019,
-                    auto: true,
-                    kph: 80,
-                  },
-                  {
-                    title: "Nissan Skyline",
-                    price: 39_000,
-                    fromPrice: 42_000,
-                    img: "https://tunatheme.com/tf/html/autixir-preview/autixir/img/product-2/6.png",
-                    year: 2019,
-                    auto: true,
-                    kph: 75,
-                  },
-                  {
-                    title: "Nissan Skyline",
-                    price: 39_000,
-                    fromPrice: 42_000,
-                    img: "https://tunatheme.com/tf/html/autixir-preview/autixir/img/product-2/6.png",
-                    year: 2019,
-                    auto: true,
-                    kph: 75,
-                  },
-                ]}
+                data={newCars}
               />
               {/* Old Cars */}
               <Cars
+                setCarInformation={setCarInformation}
+                appointmentRef={appointmentRef}
                 carsTab={carsTab}
                 realTab="oldCars"
-                data={[
-                  {
-                    title: "Volkswagen Polo",
-                    price: 40_000,
-                    fromPrice: 43_000,
-                    img: "https://tunatheme.com/tf/html/autixir-preview/autixir/img/product-2/9.png",
-                    year: 2018,
-                    auto: true,
-                    kph: 80,
-                  },
-                  {
-                    title: "Volkswagen Polo",
-                    price: 40_000,
-                    fromPrice: 43_000,
-                    img: "https://tunatheme.com/tf/html/autixir-preview/autixir/img/product-2/9.png",
-                    year: 2018,
-                    auto: true,
-                    kph: 80,
-                  },
-                  {
-                    title: "Volkswagen Polo",
-                    price: 40_000,
-                    fromPrice: 43_000,
-                    img: "https://tunatheme.com/tf/html/autixir-preview/autixir/img/product-2/9.png",
-                    year: 2018,
-                    auto: true,
-                    kph: 80,
-                  },
-                  {
-                    title: "Volkswagen Polo",
-                    price: 40_000,
-                    fromPrice: 43_000,
-                    img: "https://tunatheme.com/tf/html/autixir-preview/autixir/img/product-2/9.png",
-                    year: 2018,
-                    auto: true,
-                    kph: 80,
-                  },
-                  {
-                    title: "Volkswagen Polo",
-                    price: 40_000,
-                    fromPrice: 43_000,
-                    img: "https://tunatheme.com/tf/html/autixir-preview/autixir/img/product-2/9.png",
-                    year: 2018,
-                    auto: true,
-                    kph: 80,
-                  },
-                ]}
+                data={oldCars}
               />
             </div>
           </div>

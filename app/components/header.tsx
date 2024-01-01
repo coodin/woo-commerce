@@ -8,7 +8,6 @@ import {
   useState,
 } from "react";
 import Intermediate from "./intermediate";
-import LastPortion from "./lastPortion";
 import Logo from "./logo";
 
 type HeaderProps = {

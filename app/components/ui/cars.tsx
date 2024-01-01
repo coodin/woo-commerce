@@ -1,37 +1,48 @@
 "use client";
-import { useEffect, useState } from "react";
+import {
+  Dispatch,
+  RefObject,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import Slider from "react-slick";
-import Arrow from "./Arrow";
+import Arrow from "./arrow";
 import PrevSvg from "@/app/icons/prev";
 import NextSvg from "@/app/icons/next";
 import Link from "next/link";
 import EyeSvg from "@/app/icons/eye";
 import BasketSvg from "@/app/icons/basket";
-import FavoriteSvg from "@/app/icons/favorite";
 import { formatter } from "@/lib/utils";
 import CarSvg from "@/app/icons/car";
 import SettingsVariationSvg from "@/app/icons/settingsVariation";
 import HightWaySvg from "@/app/icons/highWay";
-import HeartSvg from "./heart";
+import CarDetailsModalProvider from "../carDetailsModalProvider";
+import { CarInformation } from "@/lib/types";
 
 type CarsProps = {
   carsTab: "newCars" | "oldCars";
   realTab: "newCars" | "oldCars";
-  data: {
-    title: string;
-    price: number;
-    fromPrice: number;
-    img: string;
-    year: number;
-    auto: boolean;
-    kph: number;
-  }[];
+  appointmentRef: RefObject<HTMLDialogElement>;
+  setCarInformation: Dispatch<SetStateAction<CarInformation | undefined>>;
+  data: CarInformation[];
 };
 
-const Cars: React.FC<CarsProps> = ({ carsTab, realTab, data }) => {
+const Cars: React.FC<CarsProps> = ({
+  carsTab,
+  realTab,
+  data,
+  appointmentRef,
+  setCarInformation,
+}) => {
   const [isHovered, setIsHovered] = useState(false);
   const [state, setState] = useState(false);
+
   const [activeDotIndex, setActiveDotIndex] = useState<number>(0);
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
+  const [carInformationInside, setCarInformationInside] =
+    useState<CarInformation>();
 
   const handleDotClick = (index: number) => {
     setActiveDotIndex(index);
@@ -60,6 +71,11 @@ const Cars: React.FC<CarsProps> = ({ carsTab, realTab, data }) => {
             : ""
         }`}
     >
+      <CarDetailsModalProvider
+        dialogRef={dialogRef}
+        carInformation={carInformationInside}
+        appointmentRef={appointmentRef}
+      />
       <div className="">
         <div className="relative block mx-[-8px]">
           <div
@@ -169,12 +185,10 @@ const Cars: React.FC<CarsProps> = ({ carsTab, realTab, data }) => {
                       hover:shadow-[0_16px_32px_0_rgba(7,28,31,0.1)] group/parent"
                     >
                       <div className="relative overflow-hidden">
-                        <Link href={""} className="">
-                          <img
-                            className="relative duration-[3.5s] ease-in-out -z-[1]"
-                            src={item.img}
-                          />
-                        </Link>
+                        <img
+                          className="relative duration-[3.5s] ease-in-out -z-[1]"
+                          src={item.img}
+                        />
                         {/* Hidden Content */}
                         <div
                           className="flex justify-center items-center absolute top-[60%] left-0 right-0 text-center
@@ -190,8 +204,12 @@ const Cars: React.FC<CarsProps> = ({ carsTab, realTab, data }) => {
                               min-[576px]:h-[50px] min-[576px]:w-[50px] min-[576px]:leading-[50px]
                                 transition-all duration-300 ease-in-out group/item"
                             >
-                              <Link
-                                href={""}
+                              <button
+                                onClick={() => {
+                                  setCarInformation(item);
+                                  setCarInformationInside(item);
+                                  dialogRef.current?.showModal();
+                                }}
                                 className="flex justify-center items-center w-full h-full font-bold 
                                    bg-white group-hover/item:bg-[#e53e29]  transition-all duration-300 ease-in-out"
                               >
@@ -200,7 +218,7 @@ const Cars: React.FC<CarsProps> = ({ carsTab, realTab, data }) => {
                                    w-[15px] h-[15px] min-[576px]:w-[22px] min-[576px]:h-[22px]
                                    group-hover/item:fill-white transition-all duration-300 ease-in-out"
                                 />
-                              </Link>
+                              </button>
                             </li>
                             {/* Basket */}
                             <li
@@ -209,8 +227,11 @@ const Cars: React.FC<CarsProps> = ({ carsTab, realTab, data }) => {
                               min-[576px]:h-[50px] min-[576px]:w-[50px] min-[576px]:leading-[50px]
                               transition-all duration-300 ease-in-out group/item"
                             >
-                              <Link
-                                href={""}
+                              <button
+                                onClick={() => {
+                                  setCarInformation(item);
+                                  appointmentRef.current?.showModal();
+                                }}
                                 className="flex justify-center items-center w-full h-full font-bold bg-white 
                                   group-hover/item:bg-[#e53e29]  transition-all duration-300 ease-in-out"
                               >
@@ -219,10 +240,10 @@ const Cars: React.FC<CarsProps> = ({ carsTab, realTab, data }) => {
                                 w-[15px] h-[15px] min-[576px]:w-[22px] min-[576px]:h-[22px] 
                                 transition-all duration-300 ease-in-out "
                                 />
-                              </Link>
+                              </button>
                             </li>
                             {/* Favorite */}
-                            <li
+                            {/* <li
                               className="h-[35px] w-[35px] leading-[35px] text-[13px] text-center
                               border-r border-solid border-[#d1dae0]
                               min-[576px]:h-[50px] min-[576px]:w-[50px] min-[576px]:leading-[50px]
@@ -240,15 +261,13 @@ const Cars: React.FC<CarsProps> = ({ carsTab, realTab, data }) => {
                                      transition-all duration-300 ease-in-out"
                                 />
                               </Link>
-                            </li>
+                            </li> */}
                           </ul>
                         </div>
                       </div>
                       <div className="px-[5px] pt-[25px] pb-[15px] text-center">
                         <h2 className="text-sm text-[#071c1f] font-bold">
-                          <Link className="" href={""}>
-                            {item.title}
-                          </Link>
+                          {item.title}
                         </h2>
                         <div
                           className="text-sm text-[#e53e29] font-bold mb-[12px]
@@ -262,10 +281,10 @@ const Cars: React.FC<CarsProps> = ({ carsTab, realTab, data }) => {
                           </span>
                         </div>
                         <div
-                          className="border-[2px] border-solid border-[#f6f6f6] 
+                          className="border-t-[2px] border-solid border-[#f6f6f6] 
                           mb-[15px] max-w-[400px]"
                         >
-                          <ul className="flex justify-between">
+                          <ul className="flex justify-evenly">
                             <li className="text-[12px]  min-[576px]:text-sm font-bold flex mt-4 text-[#071c1f] ">
                               <CarSvg
                                 width={15}
