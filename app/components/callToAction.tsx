@@ -125,7 +125,9 @@ const CallToAction: React.FC<CallToActionProps> = ({
                       onSubmit={(e) => {
                         e.preventDefault();
                         const car = newCars.find(
-                          (item) => item.make === formData.make && item.model
+                          (item) =>
+                            item.make === formData.make &&
+                            item.model == formData.model
                         );
                         setCarInformation(car);
                         appointmentRef.current?.showModal();
@@ -247,6 +249,7 @@ const CallToAction: React.FC<CallToActionProps> = ({
                         <li className="inline-block mr-5 mt-4">
                           <div className="">
                             <button
+                              type="submit"
                               className="py-5 px-8 font-bold text-sm whitespace-nowrap
                     inline-block bg-[#e53e29] leading-[1.8]
                   text-[#fff]  hover:bg-[#F2F6F7] transition-all duration-300 ease-linear
