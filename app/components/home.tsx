@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { useRef, useState } from "react";
 import Header from "./header";
 
-import ImageSlider from "./image_slider";
+import ImageSlider from "./imageSlider";
 import CallToAction from "./callToAction";
 import Testimonial from "./testimonial";
 import Blog from "./blog";

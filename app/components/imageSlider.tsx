@@ -2,12 +2,12 @@
 import Slider from "react-slick";
 import ChildHeading from "./ui/childHeading";
 import MainHeading from "./ui/mainHeading";
-import Arrow from "@/app/components/ui/arrow";
+
 import PrevSvg from "../icons/prev";
 import NextSvg from "../icons/next";
-import Link from "next/link";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Dialog from "./ui/dialog";
+import Arrow from "@/app/components/ui/arrow";
 
 type ImageSliderProps = {
   data: { imgSrc: string }[];

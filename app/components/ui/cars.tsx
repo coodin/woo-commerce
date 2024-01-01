@@ -8,10 +8,9 @@ import {
   useState,
 } from "react";
 import Slider from "react-slick";
-import Arrow from "./arrow";
+import Arrow from "@/app/components/ui/arrow";
 import PrevSvg from "@/app/icons/prev";
 import NextSvg from "@/app/icons/next";
-import Link from "next/link";
 import EyeSvg from "@/app/icons/eye";
 import BasketSvg from "@/app/icons/basket";
 import { formatter } from "@/lib/utils";
