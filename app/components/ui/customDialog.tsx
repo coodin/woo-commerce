@@ -34,15 +34,21 @@ const CustomDialog: React.FC<CustomDialogProps> = ({
       {children}
       {showCloseButton && (
         <button
-          className={`${classNameForItem} absolute right-2 top-2 w-fit h-fit`}
+          className={`${classNameForItem} absolute right-[2%] top-[2%] min-[768px]:right-[1%] min-[768px]:top-[1%] w-fit h-fit `}
           onClick={closeDialog}
         >
           <CloseVersionSvg
-            className={` h-8 w-8 fill-[#e53e29] hover:opacity-70 
+            className={` h-8 w-8 min-[768px]:h-12 min-[768px]:w-12 fill-white hover:opacity-80 
             transition-all duration-300 ease-in-out`}
           />
         </button>
       )}
+      <div
+        onClick={() => {
+          dialogRef.current?.close();
+        }}
+        className="fixed inset-0 -z-10 bg-black/60 "
+      ></div>
     </dialog>
   );
 };

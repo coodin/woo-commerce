@@ -11,16 +11,21 @@ const FooterModalProvider: React.FC<FooterModalProviderProps> = ({
   footerDialogRef,
   footerItem,
 }) => {
+  if (footerItem == undefined) return;
   return (
     <CustomDialog
-      className="min-[576px]:max-w-[540px]
-    min-[768px]:max-w-[720px] 
-    py-4  px-3 min-[768px]:py-6"
+      className="
+      fixed min-h-full w-full z-50 inset-0 overflow-auto bg-transparent m-0 max-w-full  
+      "
       dialogRef={footerDialogRef}
     >
-      <div className="">
-        <h1 className="font-bold text-2xl mb-2">{footerItem?.name}</h1>
-        <p className="font-semibold text-base">{footerItem?.description}</p>
+      <div
+        className="relative top-[50vh] translate-y-[-50%] z-10 min-[576px]:max-w-[540px] mx-auto  
+    min-[768px]:max-w-[720px]  text-black bg-white rounded-2xl
+    py-4  px-3 min-[768px]:py-6"
+      >
+        <h1 className="font-bold text-2xl mb-2">{footerItem.name}</h1>
+        <p className="font-semibold text-base">{footerItem.description}</p>
       </div>
     </CustomDialog>
   );

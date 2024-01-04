@@ -28,6 +28,7 @@ const AppointmentProvider: React.FC<AppointmentProviderProps> = ({
   carInformation,
 }) => {
   const dateRef = useRef<HTMLInputElement>(null);
+  const change = appointmentRef.current?.open;
   const openDatePicker = () => {
     const input = dateRef.current;
     if (input) {
@@ -46,9 +47,9 @@ const AppointmentProvider: React.FC<AppointmentProviderProps> = ({
       [name]: value,
     });
   };
-  useEffect(() => {
-    console.log(carInformation);
-  }, [carInformation]);
+  // useEffect(() => {
+  //   console.log(carInformation);
+  // }, [carInformation]);
 
   const handleMake = (item: extractedMakeListType) => {
     setFormData({
@@ -167,15 +168,19 @@ const AppointmentProvider: React.FC<AppointmentProviderProps> = ({
   });
 
   return (
-    <div className="">
-      <CustomDialog
-        dialogRef={appointmentRef}
-        className="  h-[80vh]  !fixed top-[10%]   left-0 backdrop:bg-black/50 my-0 px-4 
-        min-[768px]:px-8 py-10 pb-[60px]
+    <CustomDialog
+      dialogRef={appointmentRef}
+      className="fixed min-h-full w-full z-50 inset-0 py-16 overflow-auto bg-transparent m-0 max-w-full"
+    >
+      <div
+        className={`
+        relative mx-auto max-h-fit overflow-visible bg-white z-10
+           my-0 px-4  py-10 pb-[60px] min-[768px]:px-8 
         shadow-search rounded-md w-full 
         min-[576px]:max-w-[540px]
       min-[768px]:max-w-[720px] 
-      min-[992px]:max-w-[960px]"
+      min-[992px]:max-w-[960px]
+    `}
       >
         <form
           className=""
@@ -410,8 +415,8 @@ const AppointmentProvider: React.FC<AppointmentProviderProps> = ({
             </button>
           </div>
         </form>
-      </CustomDialog>
-    </div>
+      </div>
+    </CustomDialog>
   );
 };
 

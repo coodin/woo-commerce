@@ -4,6 +4,7 @@ import {
   DetailedHTMLProps,
   Dispatch,
   HTMLAttributes,
+  MouseEventHandler,
   SetStateAction,
   useEffect,
   useState,
@@ -33,13 +34,15 @@ const Dialog = <T extends { imgSrc: string }>({
     setActive(defaultActive);
   }, [defaultActive]);
 
-  const rightEvent = () => {
+  const rightEvent = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.stopPropagation();
     if (list.length - 1 > active) {
       setActive((prev) => prev + 1);
     }
   };
 
-  const leftEvent = () => {
+  const leftEvent = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.stopPropagation();
     if (active > 0) {
       setActive((prev) => prev - 1);
     }
@@ -55,7 +58,7 @@ const Dialog = <T extends { imgSrc: string }>({
     >
       {/* Left Button */}
       <button
-        onClick={leftEvent}
+        onClick={(e) => leftEvent(e)}
         disabled={active == 0}
         className={`absolute min-[640px]:top-[50%] bottom-4 left-4 min-[640px]:translate-y-[-50%] disabled:opacity-50 disabled:hover:bg-white group
           hover:bg-[#e53e29] bg-white before:hidden 
@@ -91,7 +94,7 @@ const Dialog = <T extends { imgSrc: string }>({
         />
       </button>
       <div
-        className={`${classNameForItem} relative   overflow-hidden    rounded-lg bg-[#333]  z-10 
+        className={`${classNameForItem} relative   overflow-hidden    rounded-lg bg-[#333]  z-10 select-none
         w-[50%] min-h-[50vh] min-w-[50vh] max-h-[50vh] aspect-[5/6] flex-grow-1
             backdrop:opacity-90
           min-[768px]:aspect-square min-[992px]:aspect-[10/8] min-[992px]:max-h-[80vh] min-[992px]:min-w-[60vw]  `}
@@ -100,7 +103,7 @@ const Dialog = <T extends { imgSrc: string }>({
           return (
             <div
               key={index}
-              className={`absolute top-0 left-0 ${
+              className={`absolute top-0 left-0  ${
                 active == index ? "opacity-100 " : "opacity-0"
               } transition-all duration-200 ease-in-out w-full h-full `}
             >

@@ -25,8 +25,7 @@ const CarDetailsModalProvider: React.FC<CarDetailsModalProviderProps> = ({
 
   return (
     <CustomDialog
-      className=" rounded-2xl backdrop:bg-black/30
-      min-[576px]:max-w-[540px] min-[768px]:max-w-[720px] min-[992px]:max-w-[960px]
+      className="fixed min-h-full w-full z-50 inset-0 py-16 overflow-auto bg-transparent m-0 max-w-full  
       "
       dialogRef={dialogRef}
     >
@@ -40,7 +39,11 @@ const CarDetailsModalProvider: React.FC<CarDetailsModalProviderProps> = ({
           }) ?? [{ imgSrc: "" }]
         }
       />
-      <div className="">
+      <div
+        className="relative  max-h-fit overflow-visible shadow-search mx-auto min-[768px]:top-10
+         min-[576px]:max-w-[540px] min-[768px]:max-w-[720px] min-[992px]:max-w-[960px] bg-white rounded-2xl 
+      "
+      >
         <div
           className="flex flex-wrap justify-evenly min-[992px]:justify-around items-center min-[992px]:gap-x-2 
          min-[992px]:px-5 pb-8 pt-6 min-[768px]:py-4  min-[992px]:py-6 "

@@ -57,12 +57,7 @@ const ServiceArea = () => {
                   className="mb-[5px] text-[#071c1f]
                    text-[18px] min-[768px]:text-[20px] min-[992px]:text-[22px] min-[1200px]:text-[24px] font-bold"
                 >
-                  <Link
-                    href={""}
-                    className="hover:text-[#e53e29] transition-all duration-300 ease-in-out"
-                  >
-                    Performance Upgrades
-                  </Link>
+                  Performance Upgrades
                 </h3>
                 <p className="text-[14px] leading-6  max-h-[70px] overflow-y-hidden text-[#071c1f] font-open_sans mb-6 hyphens-auto min-[768px]:text-[16px] font-normal">
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel
@@ -104,12 +99,7 @@ const ServiceArea = () => {
                   className="mb-[5px] text-[#071c1f]
                    text-[18px] min-[768px]:text-[20px] min-[992px]:text-[22px] min-[1200px]:text-[24px] font-bold"
                 >
-                  <Link
-                    href={""}
-                    className="hover:text-[#e53e29] transition-all duration-300 ease-in-out"
-                  >
-                    Anti Lock Break
-                  </Link>
+                  Anti Lock Break
                 </h3>
                 <p className="text-[14px] leading-6  max-h-[70px] overflow-y-hidden text-[#071c1f] font-open_sans mb-6 hyphens-auto min-[768px]:text-[16px] font-normal">
                   Lorem ipsum dolor sit, amet consectetur adipisicing elit.
@@ -151,12 +141,7 @@ const ServiceArea = () => {
                   className="mb-[5px] text-[#071c1f] 
                   text-[18px] min-[768px]:text-[20px] min-[992px]:text-[22px] min-[1200px]:text-[24px] font-bold"
                 >
-                  <Link
-                    href={""}
-                    className="hover:text-[#e53e29] transition-all duration-300 ease-in-out"
-                  >
-                    Crash Car Repair
-                  </Link>
+                  Crash Car Repair
                 </h3>
                 <p className="text-[14px] leading-6  max-h-[70px] overflow-y-hidden text-[#071c1f] font-open_sans mb-6 hyphens-auto min-[768px]:text-[16px] font-normal">
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est

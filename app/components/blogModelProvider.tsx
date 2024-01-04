@@ -17,12 +17,18 @@ const BlogModalProvider: React.FC<BlogModalProviderProps> = ({
 }) => {
   return (
     <CustomDialog
-      classNameForItem={"!right-0 !top-0"}
       dialogRef={dialogRef}
-      className=" rounded-2xl backdrop:bg-black/30 
-      min-[576px]:max-w-[540px] min-[768px]:max-w-[720px]  w-full overflow-y-scroll"
+      className="fixed min-h-full w-full z-50 inset-0 py-16 overflow-auto bg-transparent m-0 max-w-full"
     >
-      <div className="py-8 px-4">
+      <div
+        className="py-4 px-4
+        relative mx-auto max-h-fit overflow-visible bg-white z-10   my-0  top-[36px] min-[768px]:top-0
+     shadow-search rounded-md w-full 
+     min-[576px]:max-w-[540px]
+   min-[768px]:max-w-[720px] 
+ 
+      "
+      >
         <div className="flex flex-col">
           <img className="object-cover rounded-2xl" src={blog?.imageUrl} />
           <div className="flex gap-x-2 items-center w-full mt-4 text-sm min-[768px]:text-base">

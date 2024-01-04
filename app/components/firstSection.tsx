@@ -14,7 +14,16 @@ const FirstSection: React.FC<FirstSection> = ({ appointmentRef }) => {
         loop={true}
         className="absolute left-0 top-0 w-screen min-w-full h-full object-cover"
       >
-        <source src={"/video/compresed_spyder.mp4"} type="video/mp4"></source>
+        <source
+          src={"/video/web2.mp4"}
+          type="video/mp4"
+          media="(min-width: 768px)"
+        ></source>
+        <source
+          src={"/video/mobile.mp4"}
+          type="video/mp4"
+          media="(max-width: 767px)"
+        ></source>
       </video>
       <div
         className="relative flex justify-center items-center h-screen pt-[300px] pb-[100px] min-h-[400px]

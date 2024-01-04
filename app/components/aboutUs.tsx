@@ -193,9 +193,9 @@ const AboutUs = () => {
                 <div className="">
                   <p className="mb-[10px] text-sm min-[991px]:text-base text-[#071c1f] hyphens-auto font-open_sans">
                     Call us 24/7. We can answer for
-                    <Link href={""} className="text-[#e53e29] underline ml-1">
+                    <span className="inline text-[#e53e29] underline ml-1">
                       all your questions.
-                    </Link>
+                    </span>
                   </p>
                   <h2
                     className="font-sans font-bold text-[20px]
