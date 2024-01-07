@@ -8,7 +8,7 @@ interface CustomHTMLAttributes extends HTMLAttributes<HTMLDivElement> {
 
 interface CustomSelectProps<T>
   extends DetailedHTMLProps<CustomHTMLAttributes, HTMLDivElement> {
-  list: readonly T[];
+  list: Set<T>;
   selectedItem: T;
   selectItem: (item: T) => void;
   icon?: React.JSX.Element;
@@ -25,6 +25,8 @@ const CustomSelect = <T,>({
   changeColorOfBorder = true,
 }: CustomSelectProps<T>) => {
   const [open, setOpen] = useState(false);
+
+  if (list === undefined) return;
   return (
     <div className={className}>
       {/* <select
@@ -82,7 +84,7 @@ const CustomSelect = <T,>({
       mt-1  overflow-hidden p-0 origin-[50%_0] 
       transition-all duration-200 ease-[cubic-bezier(.5,0,0,1.25)] z-[9]`}
         >
-          {list.map((item, index) => {
+          {Array.from(list).map((item, index) => {
             return (
               <li
                 onClick={() => selectItem(item)}

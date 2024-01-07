@@ -93,30 +93,30 @@ export const blogList: BlogType[] = [
   },
 ];
 
-export const makeList = ["Make", "Audi", "BMW", "Honda", "Nissan"] as const;
-export type extractedMakeListType = (typeof makeList)[number];
+// export const makeList = ["Make", "Audi", "BMW", "Honda", "Nissan"];
+// export type extractedMakeListType = (typeof makeList)[number];
 
-export const modelList = [
-  "Model",
-  "Any",
-  "6 Series(1)",
-  "7 Series(1)",
-  "8 Series(1)",
-] as const;
+// export const modelList = [
+//   "Model",
+//   "Any",
+//   "6 Series(1)",
+//   "7 Series(1)",
+//   "8 Series(1)",
+// ] as const;
 
-export type extractedModelListType = (typeof modelList)[number];
+// export type extractedModelListType = (typeof modelList)[number];
 
-export const yearList = [
-  "Year",
-  "2015",
-  "2016",
-  "2017",
-  "2018",
-  "2019",
-  "2020",
-] as const;
+// export const yearList = [
+//   "Year",
+//   "2015",
+//   "2016",
+//   "2017",
+//   "2018",
+//   "2019",
+//   "2020",
+// ] as const;
 
-export type extractedYearListType = (typeof yearList)[number];
+// export type extractedYearListType = (typeof yearList)[number];
 
 export type CarInformation = {
   title: string;
@@ -124,12 +124,13 @@ export type CarInformation = {
   fromPrice: number;
   img: string;
   imgUrlList: string[];
-  make: extractedMakeListType;
-  model: extractedModelListType;
-  year: extractedYearListType;
+  make: string;
+  model: string;
+  year: string;
   auto: boolean;
   kph: number;
   description: string;
+  modelList?: readonly string[];
   categories?: {
     first: string;
     second: string;
@@ -137,6 +138,22 @@ export type CarInformation = {
     fourth: string;
   }[];
 };
+
+type MyObject<T extends { make: string }> = {
+  type: T["make"];
+  value: T["make"] extends "number" ? number : string;
+};
+
+// type CarModels = {
+//   make: Pick<CarInformation, "make">;
+//   model: extractedModelListType;
+//   year: extractedYearListType;
+// };
+
+// type lol = Extract<extractedMakeListType, "Make">;
+
+// type Unpacked<T> = T extends infer U ? U : T;
+// type example = Unpacked<extractedMakeListType>;
 
 export const newCars: CarInformation[] = [
   {
@@ -161,6 +178,7 @@ export const newCars: CarInformation[] = [
     incidunt qui pariatur mollitia laborum ipsam labore, doloremque
     consequuntur corporis delectus, rem ipsum ut explicabo consectetur
     at veritatis vel laudantium!`,
+    modelList: ["Model", "Any", "6 Series(1)", "7 Series(1)", "8 Series(1)"],
     categories: [
       {
         first: "Parts",
@@ -195,6 +213,7 @@ export const newCars: CarInformation[] = [
     incidunt qui pariatur mollitia laborum ipsam labore, doloremque
     consequuntur corporis delectus, rem ipsum ut explicabo consectetur
     at veritatis vel laudantium!`,
+    modelList: ["Model", "Any", "6 Series(1)", "7 Series(1)", "8 Series(1)"],
   },
   {
     title: "Volkswagen Polo",
@@ -215,6 +234,7 @@ export const newCars: CarInformation[] = [
     incidunt qui pariatur mollitia laborum ipsam labore, doloremque
     consequuntur corporis delectus, rem ipsum ut explicabo consectetur
     at veritatis vel laudantium!`,
+    modelList: ["Model", "Any", "6 Series(1)", "7 Series(1)", "8 Series(1)"],
   },
   {
     title: "Honda Freed",
@@ -234,6 +254,7 @@ export const newCars: CarInformation[] = [
     incidunt qui pariatur mollitia laborum ipsam labore, doloremque
     consequuntur corporis delectus, rem ipsum ut explicabo consectetur
     at veritatis vel laudantium!`,
+    modelList: ["Model", "Any", "6 Series(1)", "7 Series(1)", "8 Series(1)"],
   },
   {
     title: "Nissan Skyline",
@@ -253,6 +274,7 @@ export const newCars: CarInformation[] = [
     incidunt qui pariatur mollitia laborum ipsam labore, doloremque
     consequuntur corporis delectus, rem ipsum ut explicabo consectetur
     at veritatis vel laudantium!`,
+    modelList: ["Model", "Any", "6 Series(1)", "7 Series(1)", "8 Series(1)"],
   },
   {
     title: "Nissan Skyline",
@@ -272,8 +294,13 @@ export const newCars: CarInformation[] = [
     incidunt qui pariatur mollitia laborum ipsam labore, doloremque
     consequuntur corporis delectus, rem ipsum ut explicabo consectetur
     at veritatis vel laudantium!`,
+    modelList: ["Model", "Any", "6 Series(1)", "7 Series(1)", "8 Series(1)"],
   },
 ];
+
+export const newMakeList = new Set(newCars.map((item) => item.make));
+export const newModelList = new Set(newCars.map((item) => item.model));
+export const newYearList = new Set(newCars.map((item) => item.year));
 
 export const oldCars: CarInformation[] = [
   {
@@ -294,6 +321,7 @@ export const oldCars: CarInformation[] = [
     incidunt qui pariatur mollitia laborum ipsam labore, doloremque
     consequuntur corporis delectus, rem ipsum ut explicabo consectetur
     at veritatis vel laudantium!`,
+    modelList: ["Model", "Any", "6 Series(1)", "7 Series(1)", "8 Series(1)"],
   },
   {
     title: "Volkswagen Polo",
@@ -313,6 +341,7 @@ export const oldCars: CarInformation[] = [
     incidunt qui pariatur mollitia laborum ipsam labore, doloremque
     consequuntur corporis delectus, rem ipsum ut explicabo consectetur
     at veritatis vel laudantium!`,
+    modelList: ["Model", "Any", "6 Series(1)", "7 Series(1)", "8 Series(1)"],
   },
   {
     title: "Volkswagen Polo",
@@ -332,6 +361,7 @@ export const oldCars: CarInformation[] = [
     incidunt qui pariatur mollitia laborum ipsam labore, doloremque
     consequuntur corporis delectus, rem ipsum ut explicabo consectetur
     at veritatis vel laudantium!`,
+    modelList: ["Model", "Any", "6 Series(1)", "7 Series(1)", "8 Series(1)"],
   },
   {
     title: "Volkswagen Polo",
@@ -351,6 +381,7 @@ export const oldCars: CarInformation[] = [
     incidunt qui pariatur mollitia laborum ipsam labore, doloremque
     consequuntur corporis delectus, rem ipsum ut explicabo consectetur
     at veritatis vel laudantium!`,
+    modelList: ["Model", "Any", "6 Series(1)", "7 Series(1)", "8 Series(1)"],
   },
   {
     title: "Volkswagen Polo",
@@ -370,5 +401,6 @@ export const oldCars: CarInformation[] = [
     incidunt qui pariatur mollitia laborum ipsam labore, doloremque
     consequuntur corporis delectus, rem ipsum ut explicabo consectetur
     at veritatis vel laudantium!`,
+    modelList: ["Model", "Any", "6 Series(1)", "7 Series(1)", "8 Series(1)"],
   },
 ];

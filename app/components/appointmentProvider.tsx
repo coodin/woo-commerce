@@ -10,12 +10,12 @@ import PencilSvg from "../icons/pencil";
 import DateSvg from "../icons/date";
 import {
   CarInformation,
-  extractedMakeListType,
-  extractedModelListType,
-  extractedYearListType,
-  makeList,
-  modelList,
-  yearList,
+  // extractedMakeListType,
+  // extractedModelListType,
+  // extractedYearListType,
+  newMakeList,
+  newModelList,
+  newYearList,
 } from "@/lib/types";
 
 type AppointmentProviderProps = {
@@ -28,7 +28,6 @@ const AppointmentProvider: React.FC<AppointmentProviderProps> = ({
   carInformation,
 }) => {
   const dateRef = useRef<HTMLInputElement>(null);
-  const change = appointmentRef.current?.open;
   const openDatePicker = () => {
     const input = dateRef.current;
     if (input) {
@@ -51,86 +50,86 @@ const AppointmentProvider: React.FC<AppointmentProviderProps> = ({
   //   console.log(carInformation);
   // }, [carInformation]);
 
-  const handleMake = (item: extractedMakeListType) => {
+  const handleMake = (item: string) => {
     setFormData({
       ...formData,
       make: item,
     });
   };
 
-  const handleModel = (item: extractedModelListType) => {
+  const handleModel = (item: string) => {
     setFormData({
       ...formData,
       model: item,
     });
   };
 
-  const handleYear = (item: extractedYearListType) => {
+  const handleYear = (item: string) => {
     setFormData({
       ...formData,
       year: item,
     });
   };
 
-  const specialOffersList = [
+  const specialOffersList = new Set([
     "Select offers",
     "$20 Off A/C Recharge or Repairs",
     "$25 Off Brake Service",
-  ] as const;
+  ]);
 
-  type extractedspecialOffersListType = (typeof specialOffersList)[number];
+  // type extractedspecialOffersListType = (typeof specialOffersList)[number];
 
-  const handleSpecialOffers = (item: extractedspecialOffersListType) => {
+  const handleSpecialOffers = (item: string) => {
     setFormData({
       ...formData,
       specialOffers: item,
     });
   };
 
-  const waitOrDropOffList = [
+  const waitOrDropOffList = new Set([
     "Please Choose",
     "Waiting",
     "Dropping Off Vehicle",
-  ] as const;
+  ]);
 
-  type waitOrDropOffListType = (typeof waitOrDropOffList)[number];
+  // type waitOrDropOffListType = (typeof waitOrDropOffList)[number];
 
-  const handlewaitOrDropOff = (item: waitOrDropOffListType) => {
+  const handlewaitOrDropOff = (item: string) => {
     setFormData({
       ...formData,
       waitOrDropOff: item,
     });
   };
 
-  const locationList = [
+  const locationList = new Set([
     "Location",
     "Melbourne (9)",
     "Berlin (12)",
     "New York (5)",
     "london (7)",
-  ] as const;
+  ]);
 
-  type locationListType = (typeof locationList)[number];
+  // type locationListType = (typeof locationList)[number];
 
-  const handleLocation = (item: locationListType) => {
+  const handleLocation = (item: string) => {
     setFormData({
       ...formData,
       location: item,
     });
   };
 
-  const hourList = [
+  const hourList = new Set([
     "HH:MM",
     "9:00 AM - 11:00 AM",
     "11:00 AM - 13:00 PM",
     "13:00 PM - 15:00 PM",
     "15:00 PM - 17:00 PM",
     "17:00 PM - 19:00 PM",
-  ] as const;
+  ]);
 
-  type hourListListType = (typeof hourList)[number];
+  // type hourListListType = (typeof hourList)[number];
 
-  const handleHour = (item: hourListListType) => {
+  const handleHour = (item: string) => {
     setFormData({
       ...formData,
       hour: item,
@@ -144,13 +143,13 @@ const AppointmentProvider: React.FC<AppointmentProviderProps> = ({
     phoneNumber: string;
     message: string;
     date?: string;
-    make: extractedMakeListType;
-    model: extractedModelListType;
-    year: extractedYearListType;
-    specialOffers: extractedspecialOffersListType;
-    waitOrDropOff: waitOrDropOffListType;
-    location: locationListType;
-    hour: hourListListType;
+    make: string;
+    model: string;
+    year: string;
+    specialOffers: string;
+    waitOrDropOff: string;
+    location: string;
+    hour: string;
   }>({
     name: "",
     lastName: "",
@@ -192,8 +191,8 @@ const AppointmentProvider: React.FC<AppointmentProviderProps> = ({
           {/* First Part */}
           <CustomSubHeader text="Personal information" />
           {/* Row */}
-          <div className="flex flex-wrap  gap-x-0 min-[768px]:gap-x-[30px] gap-y-4 mb-10">
-            <div className="w-full min-[768px]:w-[calc(50%_-_30px)] ">
+          <div className="flex flex-wrap  gap-x-0 min-[768px]:gap-x-[30px]  gap-y-4 mb-10">
+            <div className="basis-full min-[768px]:basis-[calc(50%-15px)] ">
               <CustomInput
                 type="text"
                 name="name"
@@ -208,7 +207,7 @@ const AppointmentProvider: React.FC<AppointmentProviderProps> = ({
                 }
               />
             </div>
-            <div className="w-full min-[768px]:w-[calc(50%)] ">
+            <div className="basis-full min-[768px]:basis-[calc(50%-15px)]">
               <CustomInput
                 type="text"
                 name="lastName"
@@ -224,7 +223,7 @@ const AppointmentProvider: React.FC<AppointmentProviderProps> = ({
               />
             </div>
 
-            <div className="w-full min-[768px]:w-[calc(50%_-_30px)] ">
+            <div className="basis-full min-[768px]:basis-[calc(50%-15px)]">
               <CustomInput
                 type="text"
                 name="emailAddress"
@@ -240,7 +239,7 @@ const AppointmentProvider: React.FC<AppointmentProviderProps> = ({
               />
             </div>
 
-            <div className="w-full min-[768px]:w-[calc(50%)] ">
+            <div className="basis-full min-[768px]:basis-[calc(50%-15px)]">
               <CustomInput
                 type="text"
                 name="phoneNumber"
@@ -261,11 +260,11 @@ const AppointmentProvider: React.FC<AppointmentProviderProps> = ({
           <CustomSubHeader text="Vehicles Information" />
           {/* Second Row */}
           <div className="flex flex-wrap  min-[768px]:gap-x-[30px] gap-y-4 mb-10">
-            <div className="w-full min-[768px]:flex-[0.5]  min-[992px]:flex-[0.333]">
+            <div className="max-[768px]:basis-full min-[768px]:flex-[0.5]  min-[992px]:flex-[0.333]">
               <CustomSelect
                 className=""
                 classNameForItem="!text-[#071c1f] !font-open_sans !text-sm "
-                list={makeList}
+                list={newMakeList}
                 selectedItem={
                   formData.make === "Make"
                     ? carInformation?.make ?? "Make"
@@ -274,10 +273,10 @@ const AppointmentProvider: React.FC<AppointmentProviderProps> = ({
                 selectItem={handleMake}
               />
             </div>
-            <div className="w-full min-[768px]:flex-[0.5]  min-[992px]:flex-[0.333]">
-              <CustomSelect
+            <div className="max-[768px]:basis-full  min-[768px]:flex-[0.5]  min-[992px]:flex-[0.333]">
+              <CustomSelect<string>
                 classNameForItem="!text-[#071c1f] !font-open_sans !text-sm "
-                list={modelList}
+                list={newModelList}
                 selectedItem={
                   formData.model === "Model"
                     ? carInformation?.model ?? "Model"
@@ -286,10 +285,10 @@ const AppointmentProvider: React.FC<AppointmentProviderProps> = ({
                 selectItem={handleModel}
               />
             </div>
-            <div className="w-full min-[768px]:flex-[0.5]  min-[992px]:flex-[0.333]">
+            <div className="max-[768px]:basis-full min-[768px]:flex-[0.5]  min-[992px]:flex-[0.333]">
               <CustomSelect
                 classNameForItem="!text-[#071c1f] !font-open_sans !text-sm "
-                list={yearList}
+                list={newYearList}
                 selectedItem={
                   formData.year === "Year"
                     ? carInformation?.year ?? "Year"
@@ -299,7 +298,7 @@ const AppointmentProvider: React.FC<AppointmentProviderProps> = ({
               />
             </div>
             {/* to be consistent with preceding ui I have written this div to take gap between last two div */}
-            <div className="w-full min-[768px]:flex-[0.5]  min-[992px]:hidden"></div>
+            <div className=" max-[768px]:basis-full  min-[768px]:flex-[0.5]  min-[992px]:hidden"></div>
           </div>
           {/* Agree Section */}
           <div className="w-full">

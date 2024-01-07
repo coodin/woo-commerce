@@ -8,11 +8,13 @@ import CustomSelect from "./ui/customSelect";
 import AnimatedButton from "./ui/animatedButton";
 import {
   CarInformation,
-  extractedMakeListType,
-  extractedModelListType,
-  makeList,
-  modelList,
+  // extractedMakeListType,
+  // extractedModelListType,
+  // makeList,
+  // modelList,
   newCars,
+  newMakeList,
+  newModelList,
 } from "@/lib/types";
 
 type CallToActionProps = {
@@ -36,14 +38,14 @@ const CallToAction: React.FC<CallToActionProps> = ({
   //   return current;
   // });
 
-  const handleMake = (item: extractedMakeListType) => {
+  const handleMake = (item: string) => {
     setFormData({
       ...formData,
       make: item,
     });
   };
 
-  const handleModel = (item: extractedModelListType) => {
+  const handleModel = (item: string) => {
     setFormData({
       ...formData,
       model: item,
@@ -53,8 +55,8 @@ const CallToAction: React.FC<CallToActionProps> = ({
   // const lol2 = listOne.map((item) => item);
   // type extractedListType = typeof extractedList;
   const [formData, setFormData] = useState<{
-    make: extractedMakeListType;
-    model: extractedModelListType;
+    make: string;
+    model: string;
   }>({
     make: "Make",
     model: "Model",
@@ -136,7 +138,7 @@ const CallToAction: React.FC<CallToActionProps> = ({
                       <ul className="flex flex-col min-[767px]:flex-row items-center justify-center">
                         <li className="inline-block mr-5 mt-4">
                           <CustomSelect
-                            list={makeList}
+                            list={newMakeList}
                             changeColorOfBorder={false}
                             selectedItem={formData.make}
                             selectItem={handleMake}
@@ -147,7 +149,7 @@ const CallToAction: React.FC<CallToActionProps> = ({
                         </li>
                         <li className="inline-block mr-5 mt-4">
                           <CustomSelect
-                            list={modelList}
+                            list={newModelList}
                             changeColorOfBorder={false}
                             selectedItem={formData.model}
                             selectItem={handleModel}

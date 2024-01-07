@@ -23,11 +23,14 @@ import FirstSection from "./firstSection";
 import AppointmentProvider from "./appointmentProvider";
 import ImageProvider from "./imageProvider";
 import { BlogType, CarInformation } from "@/lib/types";
+import ContactUsProvider from "./contactUsProvider";
 
 const Home = () => {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
   const appointmentRef = useRef<HTMLDialogElement>(null);
   const blogRef = useRef<HTMLDialogElement>(null);
+  const contactRef = useRef<HTMLDialogElement>(null);
+
   const [carInformation, setCarInformation] = useState<CarInformation>();
 
   // const imageRef = useRef<HTMLDialogElement>(null);
@@ -43,6 +46,8 @@ const Home = () => {
         appointmentRef={appointmentRef}
         carInformation={carInformation}
       />
+      <ContactUsProvider contactRef={contactRef} />
+
       {/* <CarDetailsModalProvider
         dialogRef={dialogRef}
         carInformation={carInformation}
@@ -66,7 +71,7 @@ const Home = () => {
         ></div>
       )} */}
       {/* First Section */}
-      <FirstSection appointmentRef={appointmentRef} />
+      <FirstSection appointmentRef={appointmentRef} contactRef={contactRef} />
       {/* About US Area */}
       <AboutUs />
       {/* WHY CHOOSE US AREA START */}

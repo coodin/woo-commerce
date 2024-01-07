@@ -2,9 +2,13 @@ import { RefObject } from "react";
 
 type FirstSection = {
   appointmentRef: RefObject<HTMLDialogElement>;
+  contactRef: RefObject<HTMLDialogElement>;
 };
 
-const FirstSection: React.FC<FirstSection> = ({ appointmentRef }) => {
+const FirstSection: React.FC<FirstSection> = ({
+  appointmentRef,
+  contactRef,
+}) => {
   return (
     <div id="home" className="relative overflow-hidden">
       <video
@@ -55,15 +59,28 @@ const FirstSection: React.FC<FirstSection> = ({ appointmentRef }) => {
                       <br className="hidden md:block" />
                       Service Provide
                     </h1>
-                    <div className="flex justify-center min-[1200px]:hidden">
+                    <div className="flex justify-center gap-x-4 min-[1200px]:hidden">
                       <button
                         onClick={() => {
                           appointmentRef.current?.showModal();
                         }}
                         className="py-[15px] px-[20px] font-bold 
-                text-sm whitespace-nowrap inline-block bg-[#e53e29] leading-[1.8] text-[#fff]  hover:bg-[#F2F6F7] transition-all duration-300 ease-linear hover:text-[#071c1f]"
+                text-sm whitespace-nowrap inline-block bg-[#e53e29] 
+                leading-[1.8] text-[#fff]  hover:bg-[#F2F6F7]
+                 transition-all duration-300 ease-linear hover:text-[#071c1f]"
                       >
                         GET APPOINTMENT
+                      </button>
+                      <button
+                        onClick={() => {
+                          contactRef.current?.showModal();
+                        }}
+                        className="py-[15px] px-[20px] font-bold 
+                        text-sm whitespace-nowrap inline-block bg-[#e53e29] 
+                        leading-[1.8] text-[#fff]  hover:bg-[#F2F6F7]
+                         transition-all duration-300 ease-linear hover:text-[#071c1f]"
+                      >
+                        CONTACT US
                       </button>
                     </div>
                   </div>
