@@ -21,7 +21,7 @@ const FooterModalProvider: React.FC<FooterModalProviderProps> = ({
     >
       <div
         className="relative top-[50vh] translate-y-[-50%] z-10 min-[576px]:max-w-[540px] mx-auto  
-    min-[768px]:max-w-[720px]  text-black bg-white rounded-2xl
+        max-w-[350px] min-[768px]:max-w-[720px]  text-black bg-white rounded-2xl
     py-4  px-3 min-[768px]:py-6"
       >
         <h1 className="font-bold text-2xl mb-2">{footerItem.name}</h1>

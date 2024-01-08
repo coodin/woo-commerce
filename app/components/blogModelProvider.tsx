@@ -21,9 +21,10 @@ const BlogModalProvider: React.FC<BlogModalProviderProps> = ({
       className="fixed min-h-full w-full z-50 inset-0 py-16 overflow-auto bg-transparent m-0 max-w-full"
     >
       <div
-        className="py-4 px-4
-        relative mx-auto max-h-fit overflow-visible bg-white z-10   my-0  top-[36px] min-[768px]:top-0
+        className="py-4 px-4 
+        relative  mx-auto max-h-fit overflow-visible bg-white z-10   my-0  top-[36px] min-[768px]:top-0
      shadow-search rounded-md w-full 
+     max-w-[350px]
      min-[576px]:max-w-[540px]
    min-[768px]:max-w-[720px] 
  

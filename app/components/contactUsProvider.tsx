@@ -47,9 +47,10 @@ const ContactUsProvider: React.FC<ContactUsProviderProps> = ({
     >
       <div
         className={`
-        relative mx-auto max-h-fit overflow-visible bg-white z-10
+        relative mx-auto  max-h-fit overflow-visible bg-white z-10
            my-0 px-4  py-10  min-[768px]:px-8 
         shadow-search rounded-md w-full 
+        max-w-[350px]
         min-[576px]:max-w-[540px]
       min-[768px]:max-w-[720px] 
       min-[1199px]:max-w-[1100px]

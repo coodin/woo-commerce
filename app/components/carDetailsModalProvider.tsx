@@ -41,7 +41,7 @@ const CarDetailsModalProvider: React.FC<CarDetailsModalProviderProps> = ({
       />
       <div
         className="relative  max-h-fit overflow-visible shadow-search mx-auto min-[768px]:top-10
-         min-[576px]:max-w-[540px] min-[768px]:max-w-[720px] min-[992px]:max-w-[960px] bg-white rounded-2xl 
+        max-w-[350px]  min-[576px]:max-w-[540px] min-[768px]:max-w-[720px] min-[992px]:max-w-[960px] bg-white rounded-2xl 
       "
       >
         <div

@@ -21,7 +21,6 @@ import CallAction from "./callAction";
 import FeatureArea from "../featureArea";
 import FirstSection from "./firstSection";
 import AppointmentProvider from "./appointmentProvider";
-import ImageProvider from "./imageProvider";
 import { BlogType, CarInformation } from "@/lib/types";
 import ContactUsProvider from "./contactUsProvider";
 

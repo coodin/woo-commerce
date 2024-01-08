@@ -34,7 +34,7 @@ const CustomDialog: React.FC<CustomDialogProps> = ({
       {children}
       {showCloseButton && (
         <button
-          className={`${classNameForItem} absolute right-[2%] top-[2%] min-[768px]:right-[1%] min-[768px]:top-[1%] w-fit h-fit `}
+          className={`${classNameForItem} absolute right-[10px] top-[10px] min-[768px]:right-[15px] min-[768px]:top-[15px] w-fit h-fit `}
           onClick={closeDialog}
         >
           <CloseVersionSvg

@@ -173,7 +173,7 @@ const AppointmentProvider: React.FC<AppointmentProviderProps> = ({
     >
       <div
         className={`
-        relative mx-auto max-h-fit overflow-visible bg-white z-10
+        relative max-w-[350px] mx-auto max-h-fit overflow-visible bg-white z-10
            my-0 px-4  py-10 pb-[60px] min-[768px]:px-8 
         shadow-search rounded-md w-full 
         min-[576px]:max-w-[540px]
